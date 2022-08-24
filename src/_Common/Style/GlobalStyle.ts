@@ -5,7 +5,8 @@ import Normalize from './Normalize';
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'BMDOHYEON';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+    /* src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff'); */
+    src:url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
     font-weight: normal;
     font-style: normal;
   }
@@ -20,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     text-decoration: none;
     font-family: 'BMDOHYEON';
+    font-weight: 700;
   }
 
   *::-webkit-scrollbar {

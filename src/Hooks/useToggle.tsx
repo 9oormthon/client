@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 
-type Props = () => [boolean, () => void];
-export const useToggle: Props = () => {
+export const useToggle = () => {
   const [state, setState] = useState(false);
   const toggle = useCallback(() => setState(prev => !prev), []);
-  return [state, toggle];
+  const setTrue = useCallback(() => setState(true), []);
+  return { state, toggle, setTrue };
 };
