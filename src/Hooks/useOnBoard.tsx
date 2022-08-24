@@ -1,8 +1,8 @@
-import { getStorage } from '@Common/Util/localStorage';
+import { getStorage, switchKey } from '@Common/Util/localStorage';
 import { useEffect, useRef } from 'react';
-import '@Common/Style/Slide.css';
 
 import { useMovePage } from './useMovePage';
+import { useToggle } from './useToggle';
 
 const checkStorage = () => {
   const { years, id } = getStorage();
@@ -17,31 +17,43 @@ export const useOnBoard = () => {
 };
 
 type refType = React.RefObject<HTMLInputElement>;
-type keyType = 'years' | 'id' | 'pw';
+type keyType = 'years' | 'id';
 export const useHandleInput = (inputRef: refType, key: keyType) => {
   const [goBoard] = useMovePage('/onBoard');
-  const handleChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!inputRef.current) return;
-    if (e.keyCode !== 13) return;
-    const { value } = inputRef.current;
+
+  const registerData = () => {
+    const { value } = inputRef.current!;
     localStorage.setItem(key, value);
     goBoard();
   };
-  return handleChange;
+  const handleBoardData = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!inputRef.current) return;
+    if (e.keyCode !== 13) return;
+    const { value } = inputRef.current;
+
+    if (switchKey(key, value)) {
+      alert(key === 'years' ? '숫자만 입력해주세요' : '중복된 아이디입니다.');
+      return;
+    }
+    registerData();
+  };
+
+  return { handleBoardData, registerData };
 };
 
-export const useOnBoardSlider = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-
+export const useToggleSlide = () => {
+  const { state, setTrue } = useToggle();
   setTimeout(() => {
-    if (!ref.current) return;
-    ref.current.classList.remove('slideDown');
-    ref.current.classList.add('slidUp');
-  }, 100);
+    setTrue();
+  }, 0);
+  return state;
+};
 
+export const useHandleInputRef = (storageKey: 'years' | 'id') => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { handleBoardData, registerData } = useHandleInput(inputRef, storageKey);
   useEffect(() => {
     inputRef.current!.focus();
   }, []);
-  return { ref, inputRef };
+  return { inputRef, handleBoardData, registerData };
 };
