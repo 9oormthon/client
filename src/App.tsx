@@ -1,15 +1,51 @@
+import { PrivateRoute } from '@HOC/PrivateRoute';
 import { CategoryPage, DetailPage, MainPage, MyPage, OnBoardingPage, WritePage } from '@Page/.';
 import { Route, Routes } from 'react-router-dom';
 
 export const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<MainPage />} />
+      <Route
+        path="/"
+        element={
+          <PrivateRoute>
+            <MainPage />
+          </PrivateRoute>
+        }
+      />
       <Route path="/onBoard" element={<OnBoardingPage />} />
-      <Route path="/write" element={<WritePage />} />
-      <Route path="/my" element={<MyPage />} />
-      <Route path="/detail" element={<DetailPage />} />
-      <Route path="/category" element={<CategoryPage />} />
+      <Route
+        path="/write"
+        element={
+          <PrivateRoute>
+            <WritePage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/my"
+        element={
+          <PrivateRoute>
+            <MyPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/detail"
+        element={
+          <PrivateRoute>
+            <DetailPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/category"
+        element={
+          <PrivateRoute>
+            <CategoryPage />
+          </PrivateRoute>
+        }
+      />
     </Routes>
   );
 };

@@ -14,6 +14,7 @@ module.exports = override(
     '@Component': resolve('./src/Component/'),
     '@Hooks': resolve('./src/Hooks/'),
     '@MSW': resolve('./src/_msw'),
+    '@HOC': resolve('./src/HOC'),
     '@Assets': resolve('./src/Assets'),
   }),
 );

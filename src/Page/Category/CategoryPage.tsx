@@ -20,10 +20,7 @@ import './style.css';
 export const CategoryPage = () => {
   const [state, setState] = useState(0);
   const [goHome] = useMovePage('/');
-  const handleGoBack = () => {
-    localStorage.removeItem('years');
-    goHome();
-  };
+  const handleGoBack = () => goHome();
   const handleClickMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const parent = (e.target as Element).closest('#container');
     if (!(parent instanceof HTMLDivElement)) return;

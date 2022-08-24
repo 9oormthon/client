@@ -7,6 +7,7 @@
       "@Component/*": ["./Component/*"],
       "@Hooks/*": ["./Hooks/*"],
       "@MSW/*": ["./_msw/*"],
+      "@HOC/*": ["./HOC/*"],
       "@Assets/*": ["./Assets/*"]
     }
   }

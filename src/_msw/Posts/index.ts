@@ -19,4 +19,4 @@ const getPosts: Props = (req, res, ctx) => {
   return res(ctx.status(200), ctx.json(mockPostData));
 };
 
-export const postHandler = [rest.get('/api/posts', getPosts)];
+export const postHandler = [rest.get('/api/posts?location', getPosts)];
