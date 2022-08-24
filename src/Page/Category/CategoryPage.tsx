@@ -1,18 +1,21 @@
-import { Menu } from '@Assets/categoryIcons';
+import {
+  Menu,
+  Act,
+  House,
+  Mood,
+  Parking,
+  Populate,
+  RentCar,
+  Restaurant,
+  Traffic,
+  Cafe,
+} from '@Assets/categoryIcons';
 import { BackButton } from '@Component/BackButton';
 import { Button } from '@Component/Button';
 import { useMovePage } from '@Hooks/useMovePage';
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
-
-type IconType = {
-  select: boolean;
-};
-const MenuIcon = styled<IconType>(Menu)`
-  path {
-    fill: ${({ select }) => (select ? 'white' : 'orange')};
-  }
-`;
+import './style.css';
 
 export const CategoryPage = () => {
   const [state, setState] = useState(0);
@@ -23,9 +26,7 @@ export const CategoryPage = () => {
   };
   const handleClickMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const parent = (e.target as Element).closest('#container');
-    if (!(parent instanceof HTMLDivElement)) {
-      return;
-    }
+    if (!(parent instanceof HTMLDivElement)) return;
     setState(Number(parent.dataset.id));
   };
   return (
@@ -33,18 +34,22 @@ export const CategoryPage = () => {
       <BackButton onClick={handleGoBack} />
 
       <Container>
-        {CATEGORY.map(({ id, icon, title }) => (
-          <CategoryWrapper
-            id="container"
-            data-id={id}
-            key={id}
-            select={id === state}
-            onClick={handleClickMenu}
-          >
-            {icon(id === state)}
-            <span>{title}</span>
-          </CategoryWrapper>
-        ))}
+        {CATEGORY.map(({ id, icon, title }) => {
+          console.log(id);
+          console.log(state);
+          return (
+            <CategoryWrapper
+              id="container"
+              data-id={id}
+              key={id}
+              select={id === state}
+              onClick={handleClickMenu}
+            >
+              {icon(id === state)}
+              <span>{title}</span>
+            </CategoryWrapper>
+          );
+        })}
       </Container>
       <ButtonWrapper>
         <Button onClick={() => goHome()}>이동하기</Button>
@@ -116,52 +121,52 @@ const CategoryWrapper = styled.div<Props>`
 const CATEGORY = [
   {
     id: 0,
-    icon: (select: boolean) => <MenuIcon select={select} />,
+    icon: (select: boolean) => <Menu className={select ? 'fill' : 'basic'} />,
     title: '전체',
   },
   {
     id: 1,
-    icon: (select: boolean) => <MenuIcon select={select} />,
+    icon: (select: boolean) => <Traffic className={select ? 'fill' : 'basic'} />,
     title: '교통',
   },
   {
     id: 2,
-    icon: '/asset/mood.svg',
+    icon: (select: boolean) => <Mood className={select ? 'fill' : 'basic'} />,
     title: '분위기',
   },
   {
     id: 3,
-    icon: '/asset/rentCar.svg',
+    icon: (select: boolean) => <RentCar className={select ? 'fill' : 'basic'} />,
     title: '렌트카',
   },
   {
     id: 4,
-    icon: '/asset/restruant.svg',
+    icon: (select: boolean) => <Restaurant className={select ? 'fill' : 'basic'} />,
     title: '맛집',
   },
   {
     id: 5,
-    icon: '/asset/house.svg',
+    icon: (select: boolean) => <House className={select ? 'fill' : 'basic'} />,
     title: '부동산',
   },
   {
     id: 6,
-    icon: '/asset/parking.svg',
+    icon: (select: boolean) => <Parking className={select ? 'fill' : 'basic'} />,
     title: '주차장',
   },
   {
     id: 7,
-    icon: '/asset/populate.svg',
+    icon: (select: boolean) => <Populate className={select ? 'fill' : 'basic'} />,
     title: '인구',
   },
   {
     id: 8,
-    icon: '/asset/cafe.svg',
+    icon: (select: boolean) => <Cafe className={select ? 'fill' : 'basic'} />,
     title: '카페',
   },
   {
     id: 9,
-    icon: '/asset/act.svg',
+    icon: (select: boolean) => <Act className={select ? 'fill' : 'basic'} />,
     title: '여가활동',
   },
 ];
