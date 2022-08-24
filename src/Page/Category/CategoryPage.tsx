@@ -13,19 +13,15 @@ import {
 import { BackButton } from '@Component/BackButton';
 import { Button } from '@Component/Button';
 import { useMovePage } from '@Hooks/useMovePage';
-import { useState } from 'react';
 import styled, { css } from 'styled-components';
+
+import { useHandleCategory } from './CategoryPage.hook';
 import './style.css';
 
 export const CategoryPage = () => {
-  const [state, setState] = useState(0);
+  const { state, handleClickMenu } = useHandleCategory();
   const [goHome] = useMovePage('/');
   const handleGoBack = () => goHome();
-  const handleClickMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const parent = (e.target as Element).closest('#container');
-    if (!(parent instanceof HTMLDivElement)) return;
-    setState(Number(parent.dataset.id));
-  };
   return (
     <Wrapper>
       <BackButton onClick={handleGoBack} />

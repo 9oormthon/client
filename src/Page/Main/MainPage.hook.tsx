@@ -1,19 +1,19 @@
 import { useState, useLayoutEffect, useCallback } from 'react';
 
 type LocationType = '전체' | '제주시' | '서귀포시';
-export const useGetData = (location: LocationType) => {
+export const useGetData = (location: LocationType, category: string) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
 
   useLayoutEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`/api/posts?location=${location}`);
+      const response = await fetch(`/api/posts?location=${location}?category=${category}`);
       const json = await response.json();
       setData(json);
       setIsLoading(false);
     };
     fetchData();
-  }, [location]);
+  }, [location, category]);
 
   return { data, isLoading };
 };

@@ -1,22 +1,23 @@
-// import { getStorage } from '@Common/Util/localStorage';
 import { Button } from '@Component/Button';
 import { Card } from '@Component/Card';
 import { useMovePage } from '@Hooks/useMovePage';
+import { CategorySelector } from '@Recoil/Category';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import { useGetData, useGetLocation } from './MainPage.hook';
 
 export const MainPage = () => {
+  const category = useRecoilValue(CategorySelector);
   const { location, handleLocation } = useGetLocation();
-  const { data, isLoading } = useGetData(location);
+  const { data, isLoading } = useGetData(location, category);
   const [goCategory, goWrite, goMyPage] = useMovePage(['/category', '/write', '/my']);
-  // const { years, id } = getStorage();
 
   return (
     <div>
       <Header>
         <MenuIcon src="/asset/menu.svg" alt="menu" onClick={goCategory} />
-        동네분위기
+        {category}
         <ChickIcon src="/asset/chick.svg" alt="chick" onClick={goMyPage} />
       </Header>
       <LocationWrapper>

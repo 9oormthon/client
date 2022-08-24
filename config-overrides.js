@@ -16,5 +16,6 @@ module.exports = override(
     '@MSW': resolve('./src/_msw'),
     '@HOC': resolve('./src/HOC'),
     '@Assets': resolve('./src/Assets'),
+    '@Recoil': resolve('./src/Recoil'),
   }),
 );

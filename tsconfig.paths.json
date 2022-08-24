@@ -8,7 +8,8 @@
       "@Hooks/*": ["./Hooks/*"],
       "@MSW/*": ["./_msw/*"],
       "@HOC/*": ["./HOC/*"],
-      "@Assets/*": ["./Assets/*"]
+      "@Assets/*": ["./Assets/*"],
+      "@Recoil/*": ["./Recoil/*"]
     }
   }
 }
