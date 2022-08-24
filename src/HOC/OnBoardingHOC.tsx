@@ -1,3 +1,4 @@
+import { BackButton } from '@Component/BackButton';
 import { Button } from '@Component/Button';
 import { useMovePage } from '@Hooks/useMovePage';
 import { useHandleInputRef, useToggleSlide } from '@Hooks/useOnBoard';
@@ -20,9 +21,7 @@ export const OnBoardingHOC = ({ storageKey, text }: Props) => {
   };
   return (
     <Wrapper>
-      {storageKey === 'id' && (
-        <BackButton src="/asset/GoBack.svg" alt="뒤로가기" onClick={handleGoBack} />
-      )}
+      {storageKey === 'id' && <BackButton onClick={handleGoBack} />}
       <Container slide={slide} ref={ref} className="slideDown">
         <div>{text()}</div>
         <Input
@@ -92,13 +91,4 @@ const ButtonWrapper = styled.div`
   display: flex;
   width: 100vw;
   justify-content: center;
-`;
-
-const BackButton = styled.img`
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  top: 30px;
-  left: 10px;
-  color: #939393;
 `;
