@@ -1,4 +1,5 @@
 import { Button } from '@Component/Button';
+import { useMovePage } from '@Hooks/useMovePage';
 import { useHandleInputRef, useToggleSlide } from '@Hooks/useOnBoard';
 import { useRef } from 'react';
 import styled, { css } from 'styled-components';
@@ -12,10 +13,16 @@ export const OnBoardingHOC = ({ storageKey, text }: Props) => {
   const slide = useToggleSlide();
   const ref = useRef<HTMLDivElement>(null);
   const { inputRef, handleBoardData, registerData } = useHandleInputRef(storageKey);
-
+  const [goBoard] = useMovePage('/onboard');
+  const handleGoBack = () => {
+    localStorage.removeItem('years');
+    goBoard();
+  };
   return (
     <Wrapper>
-      {storageKey === 'id' && <BackButton src="/asset/GoBack.svg" alt="뒤로가기" />}
+      {storageKey === 'id' && (
+        <BackButton src="/asset/GoBack.svg" alt="뒤로가기" onClick={handleGoBack} />
+      )}
       <Container slide={slide} ref={ref} className="slideDown">
         <div>{text()}</div>
         <Input
@@ -44,7 +51,7 @@ const Wrapper = styled.div`
 `;
 const slideUp = css`
   top: 15%;
-  opacity: 1;
+  opacity: 100;
   transition: 1s;
 `;
 const Container = styled.div<ContainerProps>`
@@ -54,14 +61,24 @@ const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   opacity: 0;
+  font-style: normal;
+  font-weight: 700;
   font-size: 24px;
   line-height: 143.52%;
+  color: #242424;
   ${({ slide }) => slide && slideUp}
 `;
 const Input = styled.input`
   border-bottom: 2px solid rgba(255, 104, 0, 0.6);
+  opacity: 60;
   margin-top: 30px;
   width: 350px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 20px;
+
+  color: #242424;
   ::placeholder {
     color: #bbbbbb;
     font-size: 17px;
@@ -76,19 +93,12 @@ const ButtonWrapper = styled.div`
   width: 100vw;
   justify-content: center;
 `;
-// const Button = styled.button`
-//   width: 178px;
-//   height: 58px;
-//   color: #ffffff;
-//   background: linear-gradient(180deg, #ff8836 0%, #ff6800 100%);
-//   border-radius: 53.5385px;
-// `;
 
 const BackButton = styled.img`
   position: fixed;
   width: 20px;
   height: 20px;
-  top: 40px;
+  top: 30px;
   left: 10px;
   color: #939393;
 `;
