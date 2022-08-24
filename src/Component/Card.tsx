@@ -4,8 +4,14 @@ const CardWrapper = styled.div`
   background: white;
   border-radius: 16px;
   box-shadow: 0px 1px 12px rgba(115, 137, 169, 0.1);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   padding: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  :hover {
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.4);
+  }
 `;
 
 const Profile = styled.img`

@@ -1,4 +1,5 @@
 import { getStorage } from '@Common/Util/localStorage';
+import { Button } from '@Component/Button';
 import { Card } from '@Component/Card';
 import { useMovePage } from '@Hooks/useMovePage';
 import { useOnBoard } from '@Hooks/useOnBoard';
@@ -28,7 +29,21 @@ const ChickIcon = styled.img`
 const Body = styled.div`
   background-color: #f5f5f5;
   width: 100%;
+  height: 100vh;
   padding: 20px;
+`;
+
+const WriteButton = styled(Button)`
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  :hover {
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.4);
+  }
 `;
 
 export const MainPage = () => {
@@ -61,7 +76,10 @@ export const MainPage = () => {
         동네분위기
         <ChickIcon src="/asset/chick.svg" alt="chick" />
       </Header>
-      <Body>{!isLoading && data.map(v => <Card data={v} />)}</Body>
+      <Body>
+        {!isLoading && data.map(v => <Card data={v} />)}
+        <WriteButton>작성하기</WriteButton>
+      </Body>
     </div>
   );
 };
