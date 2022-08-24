@@ -1,7 +1,23 @@
+import { OnBoardingId, OnBoardingPw, OnBoardingYear } from '@Component/.';
+import { useMovePage } from '@Hooks/useMovePage';
+
 import { useCheckOnBoarding } from './OnBoarding.hook';
 
 export const OnBoardingPage = () => {
-  const value = useCheckOnBoarding();
+  const idx = useCheckOnBoarding();
+  const [goMain] = useMovePage('/main');
+  if (idx === 3) {
+    goMain();
+    return null;
+  }
+  return selectComponent[idx];
+};
 
-  return <div>1</div>;
+type SelectComponent = {
+  [key: number]: JSX.Element;
+};
+const selectComponent: SelectComponent = {
+  0: <OnBoardingYear />,
+  1: <OnBoardingId />,
+  2: <OnBoardingPw />,
 };

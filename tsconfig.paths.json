@@ -3,7 +3,9 @@
     "baseUrl": "./src",
     "paths": {
       "@Common/*": ["./_Common/*"],
-      "@Page/*": ["./Page/*"]
+      "@Page/*": ["./Page/*"],
+      "@Component/*": ["./Component/*"],
+      "@Hooks/*": ["./Hooks/*"]
     }
   }
 }
