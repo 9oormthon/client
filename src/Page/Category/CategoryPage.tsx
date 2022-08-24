@@ -1,8 +1,18 @@
+import { Menu } from '@Assets/categoryIcons';
 import { BackButton } from '@Component/BackButton';
 import { Button } from '@Component/Button';
 import { useMovePage } from '@Hooks/useMovePage';
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
+
+type IconType = {
+  select: boolean;
+};
+const MenuIcon = styled<IconType>(Menu)`
+  path {
+    fill: ${({ select }) => (select ? 'white' : 'orange')};
+  }
+`;
 
 export const CategoryPage = () => {
   const [state, setState] = useState(0);
@@ -21,8 +31,9 @@ export const CategoryPage = () => {
   return (
     <Wrapper>
       <BackButton onClick={handleGoBack} />
+
       <Container>
-        {CATEGORY.map(({ id, src, title }) => (
+        {CATEGORY.map(({ id, icon, title }) => (
           <CategoryWrapper
             id="container"
             data-id={id}
@@ -30,7 +41,7 @@ export const CategoryPage = () => {
             select={id === state}
             onClick={handleClickMenu}
           >
-            <img src={src} alt="카테고리" />
+            {icon(id === state)}
             <span>{title}</span>
           </CategoryWrapper>
         ))}
@@ -105,52 +116,52 @@ const CategoryWrapper = styled.div<Props>`
 const CATEGORY = [
   {
     id: 0,
-    src: '/asset/menu.svg',
+    icon: (select: boolean) => <MenuIcon select={select} />,
     title: '전체',
   },
   {
     id: 1,
-    src: '/asset/traffic.svg',
+    icon: (select: boolean) => <MenuIcon select={select} />,
     title: '교통',
   },
   {
     id: 2,
-    src: '/asset/mood.svg',
+    icon: '/asset/mood.svg',
     title: '분위기',
   },
   {
     id: 3,
-    src: '/asset/rentCar.svg',
+    icon: '/asset/rentCar.svg',
     title: '렌트카',
   },
   {
     id: 4,
-    src: '/asset/restruant.svg',
+    icon: '/asset/restruant.svg',
     title: '맛집',
   },
   {
     id: 5,
-    src: '/asset/house.svg',
+    icon: '/asset/house.svg',
     title: '부동산',
   },
   {
     id: 6,
-    src: '/asset/parking.svg',
+    icon: '/asset/parking.svg',
     title: '주차장',
   },
   {
     id: 7,
-    src: '/asset/populate.svg',
+    icon: '/asset/populate.svg',
     title: '인구',
   },
   {
     id: 8,
-    src: '/asset/cafe.svg',
+    icon: '/asset/cafe.svg',
     title: '카페',
   },
   {
     id: 9,
-    src: '/asset/act.svg',
+    icon: '/asset/act.svg',
     title: '여가활동',
   },
 ];

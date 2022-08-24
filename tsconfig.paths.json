@@ -7,7 +7,7 @@
       "@Component/*": ["./Component/*"],
       "@Hooks/*": ["./Hooks/*"],
       "@MSW/*": ["./_msw/*"],
-      "@Assets/*": ["../public/asset/*"]
+      "@Assets/*": ["./Assets/*"]
     }
   }
 }

@@ -48,7 +48,7 @@ const InfoWrapper = styled.div`
 
 export const Card = ({ data }: any) => {
   console.log(data);
-  const { title, userId, contents, createdAt, years } = data;
+  const { title, userName, contents, createdAt, years } = data;
 
   return (
     <CardWrapper>
@@ -58,7 +58,7 @@ export const Card = ({ data }: any) => {
       </TitleWrapper>
       <ContentsWrapper>{contents}</ContentsWrapper>
       <InfoWrapper>
-        <Info>{userId}</Info>
+        <Info>{userName}</Info>
         <Info>{createdAt}</Info>
       </InfoWrapper>
     </CardWrapper>

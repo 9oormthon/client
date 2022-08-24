@@ -38,12 +38,6 @@ const WriteButton = styled(Button)`
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  transition: all 0.3s ease;
-  cursor: pointer;
-
-  :hover {
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.4);
-  }
 `;
 
 export const MainPage = () => {
