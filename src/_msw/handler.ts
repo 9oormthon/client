@@ -1,15 +1,9 @@
-import {
-  DefaultBodyType,
-  PathParams,
-  ResponseComposition,
-  RestContext,
-  RestRequest,
-} from "msw";
+import { DefaultBodyType, PathParams, ResponseComposition, RestContext, RestRequest } from 'msw';
 
 type Props = (
   req: RestRequest<never, PathParams<string>>,
   res: ResponseComposition<DefaultBodyType>,
-  ctx: RestContext
+  ctx: RestContext,
 ) => any;
 
 export const createMovies: Props = (req, res, ctx) => {
