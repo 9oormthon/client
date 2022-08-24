@@ -110,47 +110,47 @@ const CATEGORY = [
   },
   {
     id: 1,
-    src: '/asset/교통.svg',
+    src: '/asset/traffic.svg',
     title: '교통',
   },
   {
     id: 2,
-    src: '/asset/분위기.svg',
+    src: '/asset/mood.svg',
     title: '분위기',
   },
   {
     id: 3,
-    src: '/asset/렌트카.svg',
+    src: '/asset/rentCar.svg',
     title: '렌트카',
   },
   {
     id: 4,
-    src: '/asset/맛집.svg',
+    src: '/asset/restruant.svg',
     title: '맛집',
   },
   {
     id: 5,
-    src: '/asset/부동산.svg',
+    src: '/asset/house.svg',
     title: '부동산',
   },
   {
     id: 6,
-    src: '/asset/주차장.svg',
+    src: '/asset/parking.svg',
     title: '주차장',
   },
   {
     id: 7,
-    src: '/asset/인구.svg',
+    src: '/asset/populate.svg',
     title: '인구',
   },
   {
     id: 8,
-    src: '/asset/카페.svg',
+    src: '/asset/cafe.svg',
     title: '카페',
   },
   {
     id: 9,
-    src: '/asset/여가활동.svg',
+    src: '/asset/act.svg',
     title: '여가활동',
   },
 ];

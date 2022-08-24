@@ -6,12 +6,8 @@ export const getStorage = () => {
 };
 
 type SwitchKey = (key: 'years' | 'id', value: number | string) => boolean;
-export const switchKey: SwitchKey = (key, value) => {
-  if (key === 'years') {
-    return validationYear(value);
-  }
-  return !validationId(`${value}`);
-};
+export const switchKey: SwitchKey = (key, value) =>
+  key === 'years' ? validationYear(value) : !validationId(`${value}`);
 const validationYear = (value: string | number) => isNaN(Number(value));
 const validationId = (value: string) => {
   // call API

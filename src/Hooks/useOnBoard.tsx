@@ -23,18 +23,16 @@ export const useHandleInput = (inputRef: refType, key: keyType) => {
 
   const registerData = () => {
     const { value } = inputRef.current!;
+    if (switchKey(key, value)) {
+      alert(key === 'years' ? '숫자만 입력해주세요' : '중복된 아이디입니다.');
+      return;
+    }
     localStorage.setItem(key, value);
     goBoard();
   };
   const handleBoardData = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!inputRef.current) return;
     if (e.keyCode !== 13) return;
-    const { value } = inputRef.current;
-
-    if (switchKey(key, value)) {
-      alert(key === 'years' ? '숫자만 입력해주세요' : '중복된 아이디입니다.');
-      return;
-    }
     registerData();
   };
 
