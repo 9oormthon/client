@@ -159,3 +159,5 @@ const CATEGORY = [
     title: '여가활동',
   },
 ];
+
+export const [a, ...CATEGORY_NAMES] = CATEGORY.map(item => item.title);
