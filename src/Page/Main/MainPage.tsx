@@ -7,6 +7,10 @@ import { useState, useEffect, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 
 const Header = styled.div`
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
   height: 50px;
   padding: 20px;
   background: linear-gradient(180deg, #ff8836 0%, #ff6800 100%);
@@ -27,6 +31,7 @@ const ChickIcon = styled.img`
 `;
 
 const Body = styled.div`
+  margin-top: 50px;
   background-color: #f5f5f5;
   width: 100%;
   height: 100vh;
@@ -40,6 +45,13 @@ const WriteButton = styled(Button)`
   transform: translateX(-50%);
 `;
 
+const Footer = styled.footer`
+  position: fixed;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
 export const MainPage = () => {
   const idx = useOnBoard();
   const [onBoard] = useMovePage('/onBoard');
@@ -70,10 +82,10 @@ export const MainPage = () => {
         동네분위기
         <ChickIcon src="/asset/chick.svg" alt="chick" />
       </Header>
-      <Body>
-        {!isLoading && data.map(v => <Card data={v} />)}
+      <Body>{!isLoading && data.map(v => <Card data={v} />)}</Body>
+      <Footer>
         <WriteButton>작성하기</WriteButton>
-      </Body>
+      </Footer>
     </div>
   );
 };

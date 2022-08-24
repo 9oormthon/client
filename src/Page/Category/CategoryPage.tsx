@@ -34,22 +34,18 @@ export const CategoryPage = () => {
       <BackButton onClick={handleGoBack} />
 
       <Container>
-        {CATEGORY.map(({ id, icon, title }) => {
-          console.log(id);
-          console.log(state);
-          return (
-            <CategoryWrapper
-              id="container"
-              data-id={id}
-              key={id}
-              select={id === state}
-              onClick={handleClickMenu}
-            >
-              {icon(id === state)}
-              <span>{title}</span>
-            </CategoryWrapper>
-          );
-        })}
+        {CATEGORY.map(({ id, icon, title }) => (
+          <CategoryWrapper
+            id="container"
+            data-id={id}
+            key={id}
+            select={id === state}
+            onClick={handleClickMenu}
+          >
+            {icon(id === state)}
+            <span>{title}</span>
+          </CategoryWrapper>
+        ))}
       </Container>
       <ButtonWrapper>
         <Button onClick={() => goHome()}>이동하기</Button>
