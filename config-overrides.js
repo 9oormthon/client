@@ -13,5 +13,6 @@ module.exports = override(
     '@Page': resolve('./src/Page/'),
     '@Component': resolve('./src/Component/'),
     '@Hooks': resolve('./src/Hooks/'),
+    '@MSW': resolve('./src/_msw'),
   }),
 );

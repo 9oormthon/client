@@ -5,7 +5,8 @@
       "@Common/*": ["./_Common/*"],
       "@Page/*": ["./Page/*"],
       "@Component/*": ["./Component/*"],
-      "@Hooks/*": ["./Hooks/*"]
+      "@Hooks/*": ["./Hooks/*"],
+      "@MSW/*": ["./_msw/*"]
     }
   }
 }
