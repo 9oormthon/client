@@ -6,7 +6,8 @@
       "@Page/*": ["./Page/*"],
       "@Component/*": ["./Component/*"],
       "@Hooks/*": ["./Hooks/*"],
-      "@MSW/*": ["./_msw/*"]
+      "@MSW/*": ["./_msw/*"],
+      "@Assets/*": ["../public/asset/*"]
     }
   }
 }
