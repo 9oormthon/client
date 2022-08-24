@@ -3,14 +3,6 @@ import { createGlobalStyle } from 'styled-components';
 import Normalize from './Normalize';
 
 const GlobalStyle = createGlobalStyle`
-  @font-face {
-    font-family: 'BMDOHYEON';
-    /* src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff'); */
-    src:url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-    font-weight: normal;
-    font-style: normal;
-  }
-
   ${Normalize}
 
   * {
@@ -20,8 +12,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 100%;
     box-sizing: border-box;
     text-decoration: none;
-    font-family: 'BMDOHYEON';
-    font-weight: 700;
+    font-family:  'Pretendard Variable';
   }
 
   *::-webkit-scrollbar {
@@ -30,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
 
   body{
     overflow-x:hidden;
-    font-family: 'BMDOHYEON';
+    font-family:  'Pretendard Variable';
   }
   
   ol, ul,li {
