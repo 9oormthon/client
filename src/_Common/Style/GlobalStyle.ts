@@ -19,7 +19,6 @@ const GlobalStyle = createGlobalStyle`
     font-size: 100%;
     box-sizing: border-box;
     text-decoration: none;
-    color: #000000;
     font-family: 'BMDOHYEON';
   }
 

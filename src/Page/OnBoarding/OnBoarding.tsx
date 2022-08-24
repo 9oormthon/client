@@ -1,12 +1,11 @@
-import { OnBoardingId, OnBoardingPw, OnBoardingYear } from '@Component/.';
+import { OnBoardingId, OnBoardingYear } from '@Component/OnBoarding';
 import { useMovePage } from '@Hooks/useMovePage';
-
-import { useCheckOnBoarding } from './OnBoarding.hook';
+import { useOnBoard } from '@Hooks/useOnBoard';
 
 export const OnBoardingPage = () => {
-  const idx = useCheckOnBoarding();
-  const [goMain] = useMovePage('/main');
-  if (idx === 3) {
+  const idx = useOnBoard();
+  const [goMain] = useMovePage('/');
+  if (idx === 2) {
     goMain();
     return null;
   }
@@ -19,5 +18,4 @@ type SelectComponent = {
 const selectComponent: SelectComponent = {
   0: <OnBoardingYear />,
   1: <OnBoardingId />,
-  2: <OnBoardingPw />,
 };
