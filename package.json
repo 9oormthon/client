@@ -48,6 +48,10 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/styled-components": "^5.1.26",
+    "msw": "^0.45.0",
     "react-app-rewired": "^2.2.1"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
