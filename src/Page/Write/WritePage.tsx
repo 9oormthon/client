@@ -29,7 +29,7 @@ export const WritePage = () => {
       userName: id,
       years,
     };
-    await postAPI('posts', data);
+    await postAPI('post', data);
     goMain();
   };
 
