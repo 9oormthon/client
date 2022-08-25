@@ -2,7 +2,8 @@ import { BackButton } from '@Component/BackButton';
 import { Button } from '@Component/Button';
 import { useMovePage } from '@Hooks/useMovePage';
 import { useHandleInputRef, useToggleSlide } from '@Hooks/useOnBoard';
-import { useRef } from 'react';
+import { useValidationModal } from '@Hooks/useValidationModal';
+import { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 type Props = {
@@ -11,9 +12,10 @@ type Props = {
 };
 
 export const OnBoardingHOC = ({ storageKey, text }: Props) => {
+  const { modal, handleModal, closeModal } = useValidationModal(storageKey);
   const slide = useToggleSlide();
   const ref = useRef<HTMLDivElement>(null);
-  const { inputRef, handleBoardData, registerData } = useHandleInputRef(storageKey);
+  const { inputRef, handleBoardData, registerData } = useHandleInputRef(storageKey, handleModal);
   const [goBoard] = useMovePage('/onboard');
   const handleGoBack = () => {
     localStorage.removeItem('years');
@@ -34,6 +36,14 @@ export const OnBoardingHOC = ({ storageKey, text }: Props) => {
       <ButtonWrapper>
         <Button onClick={registerData}>{storageKey === 'years' ? '다음' : '완료'}</Button>
       </ButtonWrapper>
+      {modal && (
+        <ModalContainer>
+          {modal}
+          <ModalButtonContainer>
+            <ModalButton onClick={closeModal}>닫기</ModalButton>
+          </ModalButtonContainer>
+        </ModalContainer>
+      )}
     </Wrapper>
   );
 };
@@ -92,4 +102,40 @@ const ButtonWrapper = styled.div`
   display: flex;
   width: 100vw;
   justify-content: center;
+`;
+
+const ModalContainer = styled.div`
+  background: #ffffff;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 24px;
+  width: 320px;
+  height: 227px;
+  position: fixed;
+  top: 30%;
+  left: calc(50% - 160px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 140%;
+
+  text-align: center;
+
+  color: #242424;
+`;
+
+const ModalButtonContainer = styled.div`
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+const ModalButton = styled(Button)`
+  width: 280px;
+  height: 48px;
 `;

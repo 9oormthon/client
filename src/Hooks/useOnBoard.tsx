@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { getStorage, switchKey } from '@Common/Util/localStorage';
 import { useEffect, useRef } from 'react';
 
@@ -18,13 +19,15 @@ export const useOnBoard = () => {
 
 type refType = React.RefObject<HTMLInputElement>;
 type keyType = 'years' | 'id';
-export const useHandleInput = (inputRef: refType, key: keyType) => {
+export const useHandleInput = (inputRef: refType, key: keyType, handleModal: () => void) => {
   const [goBoard] = useMovePage('/onBoard');
 
   const registerData = () => {
-    const { value } = inputRef.current!;
+    if (!inputRef.current) return;
+    const { value } = inputRef.current;
     if (switchKey(key, value)) {
-      alert(key === 'years' ? '숫자만 입력해주세요' : '중복된 아이디입니다.');
+      handleModal();
+      inputRef.current.value = '';
       return;
     }
     localStorage.setItem(key, value);
@@ -47,9 +50,9 @@ export const useToggleSlide = () => {
   return state;
 };
 
-export const useHandleInputRef = (storageKey: 'years' | 'id') => {
+export const useHandleInputRef = (storageKey: 'years' | 'id', handleModal: () => void) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { handleBoardData, registerData } = useHandleInput(inputRef, storageKey);
+  const { handleBoardData, registerData } = useHandleInput(inputRef, storageKey, handleModal);
   useEffect(() => {
     inputRef.current!.focus();
   }, []);
