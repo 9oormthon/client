@@ -18,6 +18,7 @@ export const WritePage = () => {
     if (!titleRef?.current || !contentsRef?.current) return;
     const title = titleRef.current.value;
     const contents = contentsRef.current.value;
+    // TODO: userName 같이주기 -> 전역상태
     const data = {
       title,
       contents,

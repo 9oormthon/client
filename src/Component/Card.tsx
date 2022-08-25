@@ -61,10 +61,8 @@ const Comments = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-left: 6px;
-  padding-left: 6px;
 
-  ::before {
+  /* ::before {
     content: ' ';
     height: 100%;
     background: #aaaaaa;
@@ -73,7 +71,7 @@ const Comments = styled.div`
     top: 0;
     left: 0;
     display: block;
-  }
+  } */
 `;
 
 const BubbleIcon = styled(Bubble)`
@@ -86,7 +84,7 @@ const sliceContents = (contents: string) => {
 };
 
 // TODO: years에 따라 다른 Profile image 보여주기
-export const Card = ({ data }: any) => {
+export const Card = ({ data, isMy }: any) => {
   const { title, userName, contents, createdAt, years, commentsCount } = data;
 
   return (
@@ -104,7 +102,7 @@ export const Card = ({ data }: any) => {
             {commentsCount}
           </Comments>
         </Info>
-        <Info>{moment(createdAt).fromNow()}</Info>
+        <Info>{isMy ? createdAt : moment(createdAt).fromNow()}</Info>
       </InfoWrapper>
     </CardWrapper>
   );
