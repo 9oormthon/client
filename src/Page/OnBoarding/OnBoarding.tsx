@@ -4,9 +4,9 @@ import { useOnBoard } from '@Hooks/useOnBoard';
 
 export const OnBoardingPage = () => {
   const idx = useOnBoard();
-  const [goMain] = useMovePage('/');
+  const [goWelcome] = useMovePage('/welcome');
   if (idx === 2) {
-    goMain();
+    goWelcome();
     return null;
   }
   return selectComponent[idx];

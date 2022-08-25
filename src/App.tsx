@@ -10,6 +10,7 @@ import {
   WritePage,
 } from '@Page/.';
 import { StartPage } from '@Page/StartPage';
+import { Welcome } from '@Page/Welcome';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -32,6 +33,7 @@ export const App = () => {
         }
       />
       <Route path="/onBoard" element={<OnBoardingPage />} />
+      <Route path="/welcome" element={<Welcome />} />
       <Route
         path="/write"
         element={

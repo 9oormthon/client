@@ -1,23 +1,23 @@
 import { ReactComponent as Bubble } from '@Assets/bubble.svg';
+import { getLevelIcon } from '@Common/Util/level';
 import moment from 'moment';
 import styled from 'styled-components';
 
+import { ProfileWrapper } from './Profile';
 import 'moment/locale/ko';
-import { Profile } from './Profile';
 
 const sliceContents = (contents: string) => {
   if (contents.length <= 65) return contents;
   return `${contents.slice(0, 65)}...`;
 };
 
-// TODO: years에 따라 다른 Profile image 보여주기
 export const Card = ({ data, isMy }: any) => {
   const { title, userName, contents, createdAt, years, commentsCount, id } = data;
 
   return (
     <CardWrapper id="Card" data-id={id}>
       <TitleWrapper>
-        <Profile src="/asset/chick.svg" alt="profile" />
+        <ProfileWrapper>{getLevelIcon(years)}</ProfileWrapper>
         {title}
       </TitleWrapper>
       <ContentsWrapper>{sliceContents(contents)}</ContentsWrapper>
