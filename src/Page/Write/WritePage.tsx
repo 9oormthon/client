@@ -1,27 +1,30 @@
 /* eslint-disable react/no-array-index-key */
+import { postAPI } from '@Common/Util/api';
 import { Button } from '@Component/Button';
 import { useMovePage } from '@Hooks/useMovePage';
 import { CATEGORY_NAMES } from '@Page/Category/CategoryPage';
 import { useRef } from 'react';
 import styled from 'styled-components';
 
-import { useGetLocation, useGetTraffic } from './WritePage.hook';
+import { useGetLocation, useGetCategory } from './WritePage.hook';
 
 export const WritePage = () => {
   const [goMain] = useMovePage('/');
   const titleRef = useRef<HTMLInputElement>(null);
-  const contextRef = useRef<HTMLTextAreaElement>(null);
+  const contentsRef = useRef<HTMLTextAreaElement>(null);
   const { location, handleLocation } = useGetLocation();
-  const { traffic, handleTraffic } = useGetTraffic();
+  const { category, handleCategory } = useGetCategory();
   const handleCreatePost = () => {
-    if (!titleRef?.current || !contextRef?.current) return;
+    if (!titleRef?.current || !contentsRef?.current) return;
     const title = titleRef.current.value;
-    const context = contextRef.current.value;
-    // api 전송
-    console.log(title);
-    console.log(location);
-    console.log(traffic);
-    console.log(context);
+    const contents = contentsRef.current.value;
+    const data = {
+      title,
+      contents,
+      category,
+      location,
+    };
+    postAPI('/posts', data);
     goMain();
   };
   return (
@@ -39,14 +42,14 @@ export const WritePage = () => {
             <option>제주시</option>
             <option>서귀포시</option>
           </Selector>
-          <Selector onChange={handleTraffic}>
+          <Selector onChange={handleCategory}>
             {CATEGORY_NAMES.map((item, i) => (
               <option key={i}>{item}</option>
             ))}
             <option />
           </Selector>
         </SelectorBox>
-        <ContextInput placeholder="내용을 입력하세요" ref={contextRef} />
+        <ContentsInput placeholder="내용을 입력하세요" ref={contentsRef} />
         <Footer>
           <Button onClick={handleCreatePost}>완료</Button>
         </Footer>
@@ -124,7 +127,7 @@ const Selector = styled.select`
   padding: 8px 15px;
 `;
 
-const ContextInput = styled.textarea`
+const ContentsInput = styled.textarea`
   width: 100%;
   height: calc(100vh - 240px);
   font-style: normal;
