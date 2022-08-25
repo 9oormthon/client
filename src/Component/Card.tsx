@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+import { DataType } from '@Page/Main/MainPage.hook';
 import styled from 'styled-components';
 
 const CardWrapper = styled.div`
@@ -46,12 +48,13 @@ const InfoWrapper = styled.div`
   justify-content: space-between;
 `;
 
-export const Card = ({ data }: any) => {
+type Props = { data: DataType };
+export const Card = ({ data }: Props) => {
   console.log(data);
-  const { title, userName, contents, createdAt, years } = data;
+  const { title, userName, contents, createdAt, years, id } = data;
 
   return (
-    <CardWrapper>
+    <CardWrapper id="Card" data-id={id}>
       <TitleWrapper>
         <Profile src="/asset/chick.svg" alt="profile" />
         {title}

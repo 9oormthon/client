@@ -5,14 +5,14 @@ import { CategorySelector } from '@Recoil/Category';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
-import { useGetData, useGetLocation } from './MainPage.hook';
+import { useGetData, useGetLocation, useHandleCardClick } from './MainPage.hook';
 
 export const MainPage = () => {
   const category = useRecoilValue(CategorySelector);
   const { location, handleLocation } = useGetLocation();
   const { data, isLoading } = useGetData(location, category);
   const [goCategory, goWrite, goMyPage] = useMovePage(['/category', '/write', '/my']);
-
+  const handleCardClick = useHandleCardClick();
   return (
     <div>
       <Header>
@@ -27,7 +27,9 @@ export const MainPage = () => {
           <option>서귀포시</option>
         </select>
       </LocationWrapper>
-      <Body>{!isLoading && data.map(v => <Card data={v} />)}</Body>
+      <Body onClick={handleCardClick}>
+        {!isLoading && data.map(v => <Card key={v.id} data={v} />)}
+      </Body>
       <Footer>
         <WriteButton onClick={goWrite}>작성하기</WriteButton>
       </Footer>
