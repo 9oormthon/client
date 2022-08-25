@@ -12,14 +12,12 @@ worker.start();
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <React.StrictMode>
-    <RecoilRoot>
-      <Router>
-        <GlobalStyle />
-        <App />
-      </Router>
-    </RecoilRoot>
-  </React.StrictMode>,
+  <RecoilRoot>
+    <Router>
+      <GlobalStyle />
+      <App />
+    </Router>
+  </RecoilRoot>,
 );
 
 reportWebVitals();
