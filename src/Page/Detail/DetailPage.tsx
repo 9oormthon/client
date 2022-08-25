@@ -1,7 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { ReactComponent as Bubble } from '@Assets/bubble.svg';
 import { Option, Send } from '@Assets/categoryIcons';
+import { Button } from '@Component/Button';
 import { ChatProfile } from '@Component/ChatProfile';
+import { Word } from '@Component/OnBoarding';
 import { Profile } from '@Component/Profile';
 import { useMovePage } from '@Hooks/useMovePage';
 import { useToggle } from '@Hooks/useToggle';
@@ -15,14 +17,23 @@ import { useCheckMyPost, useDetailData, useInputHandler, useQueryStr } from './D
 
 export const DetailPage = () => {
   const id = useQueryStr();
-  const [goMain] = useMovePage('/');
   const { data, loading } = useDetailData(id);
   const category = useRecoilValue(CategorySelector);
   const { ref, handleSendComment } = useInputHandler();
   const myPost = useCheckMyPost(data?.userName ?? '');
   const { state: optionModal, toggle: optionToggle } = useToggle();
   const { state: deleteModal, toggle: deleteToggle } = useToggle();
-  const [goUpdate] = useMovePage('/update');
+  const handleDeleteButton = () => {
+    deleteToggle();
+    optionToggle();
+  };
+  const [goUpdate, goMain] = useMovePage(['/update', '/']);
+  const deletePost = () => {
+    deleteToggle();
+    goMain();
+    // api call id
+    console.log(id);
+  };
   if (!data) return null;
   if (loading) return <div>...loading!</div>;
   return (
@@ -34,14 +45,14 @@ export const DetailPage = () => {
           <OptionContainer>
             <Option onClick={optionToggle} />
             {optionModal && (
-              <div>
-                <div aria-hidden onClick={deleteToggle}>
+              <OptionModalContainer>
+                <div aria-hidden onClick={handleDeleteButton}>
                   삭제
                 </div>
                 <div aria-hidden onClick={goUpdate}>
                   수정
                 </div>
-              </div>
+              </OptionModalContainer>
             )}
           </OptionContainer>
         )}
@@ -78,13 +89,15 @@ export const DetailPage = () => {
         <SendIcon onClick={handleSendComment} />
       </Footer>
       {deleteModal && (
-        <div>
-          <div>삭제하시겠습니까?</div>
-          <div>
-            <div>아니오</div>
-            <div>예</div>
-          </div>
-        </div>
+        <DeleteModalContainer>
+          <DeleteWordContainer>
+            <Word>삭제</Word>하시겠습니까?
+          </DeleteWordContainer>
+          <ButtonContainer>
+            <NoButton onClick={deleteToggle}>아니오</NoButton>
+            <YesButton onClick={deletePost}>예</YesButton>
+          </ButtonContainer>
+        </DeleteModalContainer>
       )}
     </>
   );
@@ -223,4 +236,77 @@ const OptionContainer = styled.div`
   height: 20px;
   top: 15px;
   right: 10px;
+`;
+
+const OptionModalContainer = styled.div`
+  background: #ffffff;
+  border-radius: 6px;
+  width: 150px;
+  height: 110px;
+  z-index: 1;
+  position: absolute;
+  right: 0px;
+  top: 25px;
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+
+  padding: 20px 16px;
+  box-sizing: border-box;
+  color: #323232;
+  box-shadow: 0px 3.34615px 8.92308px rgba(0, 0, 0, 0.18);
+  div + div {
+    margin-top: 28px;
+  }
+`;
+
+const DeleteModalContainer = styled.div`
+  z-index: 1;
+  background: #ffffff;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 24px;
+  position: fixed;
+  top: 30%;
+  left: calc(50vw - 160px);
+  width: 320px;
+  height: 227px;
+`;
+
+const DeleteWordContainer = styled.div`
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 140%;
+  height: calc(100% - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const NoButton = styled(Button)`
+  width: 136px;
+  height: 48px;
+  background: linear-gradient(180deg, #e1e1e1 0%, #e1e1e1 70.28%, #e0e0e0 100%);
+  border-radius: 24px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #696969;
+`;
+
+const YesButton = styled(NoButton)`
+  background: linear-gradient(180deg, #ff8836 0%, #ff6800 100%);
+  color: #ffffff;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 70px;
+  padding: 0px 20px;
+  justify-content: space-between;
 `;

@@ -26,6 +26,6 @@ const IdComponent = () => {
     </>
   );
 };
-const Word = styled.span`
+export const Word = styled.span`
   color: #ff8836;
 `;
