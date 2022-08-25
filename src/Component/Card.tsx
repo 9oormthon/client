@@ -1,3 +1,4 @@
+import { ReactComponent as Bubble } from '@Assets/bubble.svg';
 import styled from 'styled-components';
 
 const CardWrapper = styled.div`
@@ -37,8 +38,15 @@ const ContentsWrapper = styled.div`
 `;
 
 const Info = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #aaaaaa;
   font-size: 12px;
+
+  :last-child {
+    margin-left: 5px;
+  }
 `;
 
 const InfoWrapper = styled.div`
@@ -46,9 +54,33 @@ const InfoWrapper = styled.div`
   justify-content: space-between;
 `;
 
+const Comments = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-left: 6px;
+  padding-left: 6px;
+
+  ::before {
+    content: ' ';
+    height: 100%;
+    background: #aaaaaa;
+    width: 1px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+`;
+
+const BubbleIcon = styled(Bubble)`
+  margin-right: 3px;
+`;
+
+// TODO: years에 따라 다른 Profile image 보여주기
 export const Card = ({ data }: any) => {
-  console.log(data);
-  const { title, userName, contents, createdAt, years } = data;
+  const { title, userName, contents, createdAt, years, commentsCount } = data;
 
   return (
     <CardWrapper>
@@ -58,7 +90,13 @@ export const Card = ({ data }: any) => {
       </TitleWrapper>
       <ContentsWrapper>{contents}</ContentsWrapper>
       <InfoWrapper>
-        <Info>{userName}</Info>
+        <Info>
+          <p>{userName}</p>
+          <Comments>
+            <BubbleIcon />
+            {commentsCount}
+          </Comments>
+        </Info>
         <Info>{createdAt}</Info>
       </InfoWrapper>
     </CardWrapper>
