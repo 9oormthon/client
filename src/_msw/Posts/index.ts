@@ -16,7 +16,6 @@ type Props = (
 ) => any;
 
 const getPosts: Props = (req, res, ctx) => {
-  console.log(req);
   return res(ctx.status(200), ctx.json(mockPostData));
 };
 
@@ -29,8 +28,14 @@ const createPosts: Props = (req, res, ctx) => {
   return res(ctx.status(201));
 };
 
-// TODO: edit posts
 const editPosts: Props = (req, res, ctx) => {
+  const { id } = req.params;
+  const currentPost = mockPostData.find(v => v.id === Number(id));
+  if (!currentPost) return res(ctx.status(404));
+  currentPost.title = (req.body as any).title;
+  currentPost.contents = (req.body as any).contents;
+  currentPost.location = (req.body as any).location;
+  currentPost.category = (req.body as any).category;
   return res(ctx.status(201));
 };
 

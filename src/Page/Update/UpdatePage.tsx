@@ -2,7 +2,8 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable import/extensions */
-import { postAPI } from '@Common/Util/api';
+import { putAPI } from '@Common/Util/api';
+import { getStorage } from '@Common/Util/localStorage';
 import { Button } from '@Component/Button';
 import { CATEGORY_NAMES } from '@Page/Category/CategoryPage';
 import { dataType, useDetailData, useQueryStr } from '@Page/Detail/Detail.hook';
@@ -20,28 +21,34 @@ export const UpdatePage = () => {
   const contentsRef = useRef<HTMLTextAreaElement>(null);
   const { location, handleLocation } = useGetLocation(data?.location);
   const { category, handleCategory } = useGetCategory(data?.category);
+
   const handleUpdatePost = () => {
     if (!titleRef?.current || !contentsRef?.current) return;
     const title = titleRef.current.value;
     const contents = contentsRef.current.value;
-    // TODO: userName 같이주기 -> 전역상태
+    const { years, id: userName } = getStorage();
     const data = {
       id,
       title,
       contents,
       category,
       location,
+      userName,
+      years,
     };
-    postAPI('/update', data).then(res => goDetail());
+    putAPI(`posts/${id}`, data).then(() => goDetail());
   };
+
   useEffect(() => {
     if (!titleRef?.current || !contentsRef?.current) return;
     const { title, contents } = data as dataType;
     titleRef.current.value = title;
     contentsRef.current.value = contents;
   }, [data]);
+
   if (!data) return null;
   if (loading) return <div>...loading</div>;
+
   return (
     <>
       <Header>

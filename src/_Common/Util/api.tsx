@@ -19,3 +19,11 @@ export const postAPI = async <T,>(apiName: string, data?: object): Promise<T | u
     return undefined;
   }
 };
+
+export const putAPI = async (apiName: string, data?: object) => {
+  try {
+    await axios.put(`/api/${apiName}`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
