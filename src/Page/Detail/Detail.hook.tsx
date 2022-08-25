@@ -33,7 +33,7 @@ export const useDetailData = (id: string | undefined) => {
   const [loading, setLoading] = useState(true);
 
   const getData = async () => {
-    const temp: dataType | undefined = await fetchAPI(`list/${id}`);
+    const temp: dataType | undefined = await fetchAPI(`posts/${id}`);
     if (!temp) return;
     setData(temp);
     setLoading(false);
