@@ -3,6 +3,7 @@
 import { ReactComponent as Bubble } from '@Assets/bubble.svg';
 import { Option, Send } from '@Assets/categoryIcons';
 import { postAPI } from '@Common/Util/api';
+import { getStorage } from '@Common/Util/localStorage';
 import { Button } from '@Component/Button';
 import { ChatProfile } from '@Component/ChatProfile';
 import { Word } from '@Component/OnBoarding';
@@ -23,6 +24,7 @@ export const DetailPage = () => {
   const category = useRecoilValue(CategorySelector);
   const { ref, handleSendComment } = useInputHandler(id);
   const { data, loading } = useDetailData(id);
+  const { id: userName } = getStorage();
   const myPost = useCheckMyPost(data?.userName ?? '');
   const { state: optionModal, toggle: optionToggle } = useToggle();
   const { state: deleteModal, toggle: deleteToggle } = useToggle();
@@ -34,9 +36,8 @@ export const DetailPage = () => {
   const goUpdate = () => navigate(`/update/${id}`);
   const [goMain] = useMovePage(['/']);
   const deletePost = () => {
-    postAPI('delete', { pageIdx: id });
+    postAPI('delete', { postId: id, userName }).then(res => goMain());
     deleteToggle();
-    goMain();
   };
   if (!data) return null;
   if (loading) return <div>...loading!</div>;

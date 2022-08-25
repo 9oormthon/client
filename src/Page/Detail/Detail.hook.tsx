@@ -12,7 +12,7 @@ export const useQueryStr = () => {
 
 type commentType = {
   id: number;
-  userId: string;
+  userName: string;
   contents: string;
   createdAt: string;
   postId: number;

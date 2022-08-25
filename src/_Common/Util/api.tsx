@@ -27,3 +27,6 @@ export const putAPI = async (apiName: string, data?: object) => {
     console.log(error);
   }
 };
+
+type Filter = (arr: any[], k: string, v: string) => any[];
+export const filter: Filter = (arr, k, v) => arr.filter(item => item[k] === v);

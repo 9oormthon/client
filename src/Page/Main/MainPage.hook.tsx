@@ -1,3 +1,4 @@
+import { filter } from '@Common/Util/api';
 import { useState, useLayoutEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,7 +22,11 @@ export const useGetData = (location: LocationType, category: string) => {
         `http://3.39.231.16:8080/api/posts?location=${location}?category=${category}`,
       );
       const json = await response.json();
-      setData(json);
+
+      const filterLocation = location === '전체' ? json : filter(json, 'location', location);
+      const arr =
+        category === '전체' ? filterLocation : filter(filterLocation, 'category', category);
+      setData(arr);
       setIsLoading(false);
     };
     fetchData();
@@ -58,11 +63,8 @@ export const useHandleMoveCard = () => {
   const goDetail = (id: string) => navigate(`/detail/${id}`);
 
   const func = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    console.log(e.target);
     const target = (e.target as Element).closest('#Comment');
-    console.log(target);
     if (!(target instanceof HTMLDivElement)) return;
-    console.log(target.dataset.id);
     if (!target.dataset.id) return;
     goDetail(target.dataset.id);
   };

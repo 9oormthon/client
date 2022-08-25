@@ -5,17 +5,17 @@ import { Profile } from './Profile';
 
 type Props = {
   id: number;
-  userId: string;
+  userName: string;
   createdAt: string;
   contents: string;
 };
-export const ChatProfile = ({ id, userId, createdAt, contents }: Props) => {
+export const ChatProfile = ({ id, userName, createdAt, contents }: Props) => {
   return (
     <Container>
       <ProfileContainer>
         <Profile src="/asset/chick.svg" alt="profile" />
         <div>
-          <NickName>{userId}</NickName>
+          <NickName>{userName}</NickName>
           <Info>{moment(createdAt).fromNow()}</Info>
           <Content>{contents}</Content>
         </div>
