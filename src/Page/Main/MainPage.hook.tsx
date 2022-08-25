@@ -17,7 +17,9 @@ export const useGetData = (location: LocationType, category: string) => {
 
   useLayoutEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`/api/posts?location=${location}?category=${category}`);
+      const response = await fetch(
+        `http://3.39.231.16:8080/api/posts?location=${location}?category=${category}`,
+      );
       const json = await response.json();
       setData(json);
       setIsLoading(false);

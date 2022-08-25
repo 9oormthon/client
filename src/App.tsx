@@ -19,7 +19,7 @@ export const App = () => {
   useEffect(() => {
     setTimeout(() => {
       toggleLoading();
-    }, 2000);
+    }, 1500);
   }, []);
   if (!loading) return <StartPage />;
   return (
