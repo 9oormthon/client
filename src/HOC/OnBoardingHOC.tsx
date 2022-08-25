@@ -3,7 +3,7 @@ import { Button } from '@Component/Button';
 import { useMovePage } from '@Hooks/useMovePage';
 import { useHandleInputRef, useToggleSlide } from '@Hooks/useOnBoard';
 import { useValidationModal } from '@Hooks/useValidationModal';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import styled, { css } from 'styled-components';
 
 type Props = {
@@ -27,7 +27,7 @@ export const OnBoardingHOC = ({ storageKey, text }: Props) => {
       <Container slide={slide} ref={ref} className="slideDown">
         <div>{text()}</div>
         <Input
-          type="text"
+          type={storageKey === 'years' ? 'number' : 'text'}
           ref={inputRef}
           onKeyDown={handleBoardData}
           placeholder={storageKey === 'years' ? '연차' : '이름'}

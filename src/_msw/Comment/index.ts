@@ -21,13 +21,14 @@ const createComment: Props = (req, res, ctx) => {
     id: Math.floor(Math.random() * 1000),
     userName: userId,
     contents: comment,
-    createAt: '2022-08-24 18:44',
+    createdAt: new Date().toString(),
   };
   if (!target?.comments) {
     target.comments = [newData];
   } else {
     target.comments.push(newData);
   }
+  target.commentsCount += 1;
   return res(ctx.status(200), ctx.json(true));
 };
 

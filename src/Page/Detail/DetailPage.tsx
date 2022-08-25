@@ -20,9 +20,9 @@ import { useCheckMyPost, useDetailData, useInputHandler, useQueryStr } from './D
 
 export const DetailPage = () => {
   const id = useQueryStr();
-  const { data, loading } = useDetailData(id);
   const category = useRecoilValue(CategorySelector);
   const { ref, handleSendComment } = useInputHandler(id);
+  const { data, loading } = useDetailData(id);
   const myPost = useCheckMyPost(data?.userName ?? '');
   const { state: optionModal, toggle: optionToggle } = useToggle();
   const { state: deleteModal, toggle: deleteToggle } = useToggle();
@@ -89,7 +89,7 @@ export const DetailPage = () => {
         </CommentWrapper>
       </div>
       <Footer>
-        <Input placeholder="댓글달기" ref={ref} />
+        <Input placeholder="댓글을 남겨보세요" ref={ref} />
         <SendIcon onClick={handleSendComment} />
       </Footer>
       {deleteModal && (

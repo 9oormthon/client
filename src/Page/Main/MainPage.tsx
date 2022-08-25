@@ -20,7 +20,7 @@ export const MainPage = () => {
       <Header>
         <MenuIcon src="/asset/menu.svg" alt="menu" onClick={goCategory} />
         {category}
-        <Chick onClick={goMyPage} />
+        <MyPageIcon onClick={goMyPage} />
       </Header>
       <LocationWrapper>
         <select onChange={handleLocation}>
@@ -56,6 +56,11 @@ const Header = styled.div`
 const MenuIcon = styled.img`
   width: 22px;
   height: 22px;
+  cursor: pointer;
+`;
+
+const MyPageIcon = styled(Chick)`
+  cursor: pointer;
 `;
 
 const LocationWrapper = styled.div`
@@ -80,7 +85,6 @@ const Body = styled.div`
   margin-top: 90px;
   background-color: #f5f5f5;
   width: 100%;
-  height: 100vh;
   padding: 20px;
   padding-top: 0px;
 `;
