@@ -1,6 +1,7 @@
-/* eslint-disable import/extensions */
-import { DataType } from '@Page/Main/MainPage.hook';
+import { ReactComponent as Bubble } from '@Assets/bubble.svg';
+import moment from 'moment';
 import styled from 'styled-components';
+import 'moment/locale/ko';
 
 const CardWrapper = styled.div`
   background: white;
@@ -39,8 +40,15 @@ const ContentsWrapper = styled.div`
 `;
 
 const Info = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #aaaaaa;
   font-size: 12px;
+
+  :last-child {
+    margin-left: 5px;
+  }
 `;
 
 const InfoWrapper = styled.div`
@@ -48,10 +56,38 @@ const InfoWrapper = styled.div`
   justify-content: space-between;
 `;
 
-type Props = { data: DataType };
-export const Card = ({ data }: Props) => {
-  console.log(data);
-  const { title, userName, contents, createdAt, years, id } = data;
+const Comments = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-left: 6px;
+  padding-left: 6px;
+
+  ::before {
+    content: ' ';
+    height: 100%;
+    background: #aaaaaa;
+    width: 1px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+`;
+
+const BubbleIcon = styled(Bubble)`
+  margin-right: 3px;
+`;
+
+const sliceContents = (contents: string) => {
+  if (contents.length <= 65) return contents;
+  return `${contents.slice(0, 65)}...`;
+};
+
+// TODO: years에 따라 다른 Profile image 보여주기
+export const Card = ({ data }: any) => {
+  const { title, userName, contents, createdAt, years, commentsCount, id } = data;
 
   return (
     <CardWrapper id="Card" data-id={id}>
@@ -59,10 +95,16 @@ export const Card = ({ data }: Props) => {
         <Profile src="/asset/chick.svg" alt="profile" />
         {title}
       </TitleWrapper>
-      <ContentsWrapper>{contents}</ContentsWrapper>
+      <ContentsWrapper>{sliceContents(contents)}</ContentsWrapper>
       <InfoWrapper>
-        <Info>{userName}</Info>
-        <Info>{createdAt}</Info>
+        <Info>
+          <p>{userName}</p>
+          <Comments>
+            <BubbleIcon />
+            {commentsCount}
+          </Comments>
+        </Info>
+        <Info>{moment(createdAt).fromNow()}</Info>
       </InfoWrapper>
     </CardWrapper>
   );

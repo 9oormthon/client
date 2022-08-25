@@ -9,11 +9,11 @@ export const useGetLocation = () => {
   return { location, handleLocation };
 };
 
-export const useGetTraffic = () => {
-  const [traffic, setTraffic] = useState('전체');
-  const handleTraffic = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    setTraffic(e.target.value);
+export const useGetCategory = () => {
+  const [category, setCategory] = useState('전체');
+  const handleCategory = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCategory(e.target.value);
   }, []);
 
-  return { traffic, handleTraffic };
+  return { category, handleCategory };
 };
