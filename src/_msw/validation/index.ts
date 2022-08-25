@@ -7,7 +7,7 @@ import {
   RestRequest,
 } from 'msw';
 
-import { mockPostData } from './data';
+// import { mockPostData } from './data';
 
 type Props = (
   req: RestRequest<never, PathParams<string>>,
@@ -15,9 +15,9 @@ type Props = (
   ctx: RestContext,
 ) => any;
 
-const getPosts: Props = (req, res, ctx) => {
-  console.log(req);
-  return res(ctx.status(200), ctx.json(mockPostData));
+const postValidation: Props = (req, res, ctx) => {
+  const { id } = req.body;
+  return res(ctx.status(200), ctx.json(true));
 };
 
-export const postHandler = [rest.get('/api/posts?location', getPosts)];
+export const validationHandler = [rest.post('/api/validation', postValidation)];
