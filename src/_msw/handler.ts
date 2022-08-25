@@ -1,4 +1,5 @@
 import { listHandler } from './list';
+import { myHandler } from './My';
 import { postHandler } from './Posts';
 
-export const handlers = [...postHandler, ...listHandler];
+export const handlers = [...postHandler, ...myHandler, ...listHandler];
