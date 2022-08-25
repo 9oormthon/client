@@ -50,10 +50,10 @@ export const WritePage = () => {
           </Selector>
         </SelectorBox>
         <ContentsInput placeholder="내용을 입력하세요" ref={contentsRef} />
-        <Footer>
-          <Button onClick={handleCreatePost}>완료</Button>
-        </Footer>
       </Body>
+      <Footer>
+        <Button onClick={handleCreatePost}>완료</Button>
+      </Footer>
     </>
   );
 };
@@ -88,7 +88,7 @@ const Body = styled.div`
 
 const Footer = styled.footer`
   position: fixed;
-  bottom: 10px;
+  bottom: 20px;
   width: 100%;
   display: flex;
   justify-content: center;

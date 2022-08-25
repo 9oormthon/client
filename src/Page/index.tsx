@@ -4,3 +4,4 @@ export * from './Detail/DetailPage';
 export * from './MyPage/MyPage';
 export * from './OnBoarding/OnBoarding';
 export * from './Write/WritePage';
+export * from './Update/UpdatePage';
