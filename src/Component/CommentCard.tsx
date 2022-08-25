@@ -33,7 +33,13 @@ const sliceContents = (contents: string) => {
   return `${contents.slice(0, 65)}...`;
 };
 
-export const CommentCard = ({ data }: any) => {
+export type CommentCardType = {
+  postId: number;
+  postTitle: string;
+  contents: string;
+  createdAt: string;
+};
+export const CommentCard = ({ data }: { data: CommentCardType }) => {
   const { postId, postTitle, contents, createdAt } = data;
 
   return (

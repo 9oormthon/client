@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-props-no-spreading */
 import { ReactComponent as Bubble } from '@Assets/bubble.svg';
 import { Option, Send } from '@Assets/categoryIcons';
@@ -9,6 +10,7 @@ import { useMovePage } from '@Hooks/useMovePage';
 import { useToggle } from '@Hooks/useToggle';
 import { CategorySelector } from '@Recoil/Category';
 import moment from 'moment';
+import { useNavigate } from 'react-router';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
@@ -27,7 +29,9 @@ export const DetailPage = () => {
     deleteToggle();
     optionToggle();
   };
-  const [goUpdate, goMain] = useMovePage(['/update', '/']);
+  const navigate = useNavigate();
+  const goUpdate = () => navigate(`/update?${id}`);
+  const [goMain] = useMovePage(['/']);
   const deletePost = () => {
     deleteToggle();
     goMain();

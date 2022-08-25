@@ -1,8 +1,10 @@
+/* eslint-disable import/extensions */
 import { ReactComponent as Chick } from '@Assets/chick.svg';
 import { ReactComponent as GoBack } from '@Assets/GoBack.svg';
 import { fetchAPI } from '@Common/Util/api';
 import { Card } from '@Component/Card';
-import { CommentCard } from '@Component/CommentCard';
+import { CommentCard, CommentCardType } from '@Component/CommentCard';
+import { DataType } from '@Page/Main/MainPage.hook';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -106,21 +108,17 @@ const Body = styled.div`
 
 export const MyPage = () => {
   const navigate = useNavigate();
-  const handleGoBack = () => {
-    navigate(-1);
-  };
+  const handleGoBack = () => navigate(-1);
   const [currentTab, setCurrentTab] = useState('post');
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleTabClick = (tabName: string) => {
-    setCurrentTab(tabName);
-  };
-  const [postData, setPostData] = useState([]);
-  const [commentData, setCommentData] = useState([]);
+  const handleTabClick = (tabName: string) => setCurrentTab(tabName);
+  const [postData, setPostData] = useState<DataType[]>([]);
+  const [commentData, setCommentData] = useState<CommentCardType[]>([]);
   useEffect(() => {
     const fetchMyData = async () => {
-      const myPosts = await fetchAPI('myPosts');
-      const myComments = await fetchAPI('myComments');
+      const myPosts = (await fetchAPI('myPosts')) as DataType[];
+      const myComments = (await fetchAPI('myComments')) as CommentCardType[];
       setPostData(myPosts);
       setCommentData(myComments);
       setIsLoading(false);
