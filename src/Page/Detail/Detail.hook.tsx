@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable import/extensions */
 import { fetchAPI, postAPI } from '@Common/Util/api';
 import { getStorage } from '@Common/Util/localStorage';
@@ -29,27 +30,30 @@ export type dataType = {
   category: string;
   location: LocationType;
 };
-export const useDetailData = (id: string | undefined) => {
+export const useDetailData = (id: string | undefined, idx: object) => {
   const [data, setData] = useState<dataType | undefined>(undefined);
   const [loading, setLoading] = useState(true);
 
   const getData = async () => {
     const temp: dataType | undefined = await fetchAPI(`list/${id}`);
+    temp?.comment.reverse();
     if (!temp) return;
     setData(temp);
     setLoading(false);
   };
 
   useEffect(() => {
-    console.log(id);
     if (!id) return;
     getData();
-  }, [id]);
+  }, [id, idx]);
 
   return { data, loading };
 };
 
-export const useInputHandler = (id: string | undefined) => {
+export const useInputHandler = (
+  id: string | undefined,
+  setter: React.Dispatch<React.SetStateAction<{}>>,
+) => {
   const ref = useRef<HTMLInputElement>(null);
   const { id: userId } = getStorage();
   const handleSendComment = () => {
@@ -57,12 +61,7 @@ export const useInputHandler = (id: string | undefined) => {
     if (!ref?.current) return;
     const { value } = ref.current;
     ref.current.value = '';
-    postAPI('comment', { contents: value, postId: id, userName: userId });
+    postAPI('comment', { contents: value, postId: id, userName: userId }).then(res => setter({}));
   };
   return { ref, handleSendComment };
-};
-
-export const useCheckMyPost = (writer: string) => {
-  const { id } = getStorage();
-  return id === writer;
 };

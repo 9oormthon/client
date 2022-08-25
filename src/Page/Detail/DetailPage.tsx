@@ -12,29 +12,28 @@ import { useMovePage } from '@Hooks/useMovePage';
 import { useToggle } from '@Hooks/useToggle';
 import { CategorySelector } from '@Recoil/Category';
 import moment from 'moment';
-import { useNavigate } from 'react-router';
+import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import 'moment/locale/ko';
-import { useCheckMyPost, useDetailData, useInputHandler, useQueryStr } from './Detail.hook';
+import { useDetailData, useInputHandler, useQueryStr } from './Detail.hook';
 
 export const DetailPage = () => {
   const id = useQueryStr();
   const category = useRecoilValue(CategorySelector);
-  const { ref, handleSendComment } = useInputHandler(id);
-  const { data, loading } = useDetailData(id);
+  const [idx, setIdx] = useState({});
+  const { ref, handleSendComment } = useInputHandler(id, setIdx);
+  const { data, loading } = useDetailData(id, idx);
   const { id: userName } = getStorage();
-  const myPost = useCheckMyPost(data?.userName ?? '');
+  const myPost = data?.userName === userName;
   const { state: optionModal, toggle: optionToggle } = useToggle();
   const { state: deleteModal, toggle: deleteToggle } = useToggle();
   const handleDeleteButton = () => {
     deleteToggle();
     optionToggle();
   };
-  const navigate = useNavigate();
-  const goUpdate = () => navigate(`/update/${id}`);
-  const [goMain] = useMovePage(['/']);
+  const [goMain, goUpdate] = useMovePage(['/', `/update/${id}`]);
   const deletePost = () => {
     postAPI('delete', { postId: id, userName }).then(res => goMain());
     deleteToggle();

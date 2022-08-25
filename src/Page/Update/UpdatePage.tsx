@@ -14,7 +14,7 @@ import styled from 'styled-components';
 
 export const UpdatePage = () => {
   const id = useQueryStr();
-  const { data, loading } = useDetailData(id);
+  const { data, loading } = useDetailData(id, {});
   const navigate = useNavigate();
   const goDetail = () => navigate(`/detail/${id}`);
   const titleRef = useRef<HTMLInputElement>(null);
