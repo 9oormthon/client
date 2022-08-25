@@ -39,7 +39,7 @@ export const useGetLocation = () => {
 
 export const useHandleCardClick = () => {
   const navigate = useNavigate();
-  const goDetail = (id: string) => navigate(`/detail?${id}`);
+  const goDetail = (id: string) => navigate(`/detail/${id}`);
 
   const func = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const target = (e.target as Element).closest('#Card');
@@ -53,7 +53,7 @@ export const useHandleCardClick = () => {
 
 export const useHandleMoveCard = () => {
   const navigate = useNavigate();
-  const goDetail = (id: string) => navigate(`/detail?${id}`);
+  const goDetail = (id: string) => navigate(`/detail/${id}`);
 
   const func = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     console.log(e.target);

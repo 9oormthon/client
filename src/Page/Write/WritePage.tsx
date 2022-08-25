@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import { postAPI } from '@Common/Util/api';
+import { getStorage } from '@Common/Util/localStorage';
 import { Button } from '@Component/Button';
 import { useMovePage } from '@Hooks/useMovePage';
 import { CATEGORY_NAMES } from '@Page/Category/CategoryPage';
@@ -14,20 +15,24 @@ export const WritePage = () => {
   const contentsRef = useRef<HTMLTextAreaElement>(null);
   const { location, handleLocation } = useGetLocation();
   const { category, handleCategory } = useGetCategory();
-  const handleCreatePost = () => {
+
+  const handleCreatePost = async () => {
     if (!titleRef?.current || !contentsRef?.current) return;
     const title = titleRef.current.value;
     const contents = contentsRef.current.value;
-    // TODO: userName 같이주기 -> 전역상태
+    const { id, years } = getStorage();
     const data = {
       title,
       contents,
       category,
       location,
+      userName: id,
+      years,
     };
-    postAPI('/posts', data);
+    await postAPI('posts', data);
     goMain();
   };
+
   return (
     <>
       <Header>

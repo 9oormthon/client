@@ -3,11 +3,11 @@ import { fetchAPI, postAPI } from '@Common/Util/api';
 import { getStorage } from '@Common/Util/localStorage';
 import { LocationType } from '@Page/Main/MainPage.hook';
 import { useState, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export const useQueryStr = () => {
-  const { search } = useLocation();
-  return search.split('?')[1];
+  const params = useParams();
+  return params?.id;
 };
 
 type commentType = {
