@@ -1,7 +1,9 @@
 import { ReactComponent as Bubble } from '@Assets/bubble.svg';
 import moment from 'moment';
 import styled from 'styled-components';
+
 import 'moment/locale/ko';
+import { Profile } from './Profile';
 
 const CardWrapper = styled.div`
   background: white;
@@ -15,15 +17,6 @@ const CardWrapper = styled.div`
   :hover {
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.4);
   }
-`;
-
-const Profile = styled.img`
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(180deg, #ff8836 0%, #ff6800 100%);
-  padding: 6px;
-  border-radius: 50%;
-  margin-right: 10px;
 `;
 
 const TitleWrapper = styled.div`

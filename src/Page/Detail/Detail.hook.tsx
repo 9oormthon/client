@@ -1,5 +1,6 @@
 import { fetchAPI } from '@Common/Util/api';
-import { useState, useEffect } from 'react';
+import { getStorage } from '@Common/Util/localStorage';
+import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export const useQueryStr = () => {
@@ -39,4 +40,22 @@ export const useDetailData = (id: string) => {
   }, [id]);
 
   return { data, loading };
+};
+
+export const useInputHandler = () => {
+  const ref = useRef<HTMLInputElement>(null);
+  const handleSendComment = () => {
+    if (!ref?.current) return;
+    const { value } = ref.current;
+    // postComment
+    console.log(value);
+    ref.current.value = '';
+  };
+  return { ref, handleSendComment };
+};
+
+export const useCheckMyPost = (writer: string) => {
+  const { id } = getStorage();
+  return true;
+  return id === writer;
 };

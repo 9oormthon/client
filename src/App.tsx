@@ -1,5 +1,13 @@
 import { PrivateRoute } from '@HOC/PrivateRoute';
-import { CategoryPage, DetailPage, MainPage, MyPage, OnBoardingPage, WritePage } from '@Page/.';
+import {
+  CategoryPage,
+  DetailPage,
+  MainPage,
+  MyPage,
+  OnBoardingPage,
+  UpdatePage,
+  WritePage,
+} from '@Page/.';
 import { Route, Routes } from 'react-router-dom';
 
 export const App = () => {
@@ -43,6 +51,14 @@ export const App = () => {
         element={
           <PrivateRoute>
             <CategoryPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/update"
+        element={
+          <PrivateRoute>
+            <UpdatePage />
           </PrivateRoute>
         }
       />
