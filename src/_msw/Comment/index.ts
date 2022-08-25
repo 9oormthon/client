@@ -16,14 +16,18 @@ type Props = (
 
 const createComment: Props = (req, res, ctx) => {
   const { comment, postIdx, userId } = req.body;
-  mockPostData
-    .filter(({ id }) => id === postIdx)[0]
-    .comments.concat({
-      id: Math.floor(Math.random() * 1000),
-      userName: userId,
-      contents: comment,
-      createAt: '2022-08-24 18:44',
-    });
+  const target = mockPostData.filter(({ id }) => id === Number(postIdx))[0];
+  const newData = {
+    id: Math.floor(Math.random() * 1000),
+    userName: userId,
+    contents: comment,
+    createAt: '2022-08-24 18:44',
+  };
+  if (!target?.comments) {
+    target.comments = [newData];
+  } else {
+    target.comments.push(newData);
+  }
   return res(ctx.status(200), ctx.json(true));
 };
 
