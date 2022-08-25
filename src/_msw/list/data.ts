@@ -20,5 +20,6 @@ export const mockListData = {
     },
   ],
   commentsCount: 2,
+  category: '부동산',
   years: 0,
 };

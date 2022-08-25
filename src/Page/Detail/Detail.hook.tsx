@@ -1,5 +1,7 @@
+/* eslint-disable import/extensions */
 import { fetchAPI } from '@Common/Util/api';
 import { getStorage } from '@Common/Util/localStorage';
+import { LocationType } from '@Page/Main/MainPage.hook';
 import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -14,7 +16,7 @@ type commentType = {
   contents: string;
   createdAt: string;
 };
-type dataType = {
+export type dataType = {
   id: number;
   userName: string;
   title: string;
@@ -23,6 +25,8 @@ type dataType = {
   comments: commentType[];
   commentsCount: number;
   years: number;
+  category: string;
+  location: LocationType;
 };
 export const useDetailData = (id: string) => {
   const [data, setData] = useState<dataType | undefined>(undefined);

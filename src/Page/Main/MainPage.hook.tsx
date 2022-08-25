@@ -10,7 +10,7 @@ export type DataType = {
   id: number;
   commentsCount: number;
 };
-type LocationType = '전체' | '제주시' | '서귀포시';
+export type LocationType = '전체' | '제주시' | '서귀포시';
 export const useGetData = (location: LocationType, category: string) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<DataType[]>([]);
