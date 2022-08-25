@@ -1,5 +1,7 @@
 import { ReactComponent as Bubble } from '@Assets/bubble.svg';
+import moment from 'moment';
 import styled from 'styled-components';
+import 'moment/locale/ko';
 
 const CardWrapper = styled.div`
   background: white;
@@ -97,7 +99,7 @@ export const Card = ({ data }: any) => {
             {commentsCount}
           </Comments>
         </Info>
-        <Info>{createdAt}</Info>
+        <Info>{moment(createdAt).fromNow()}</Info>
       </InfoWrapper>
     </CardWrapper>
   );
