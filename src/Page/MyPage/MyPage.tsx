@@ -37,7 +37,10 @@ export const MyPage = () => {
           <ProfileIcon />
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
             <UserName>{id}</UserName>
-            <Years>{years}년 차</Years>
+            <div style={{ display: 'flex' }}>
+              <Years style={{ marginRight: '5px' }}>LEVEL 4</Years>
+              <Years>{years}년 차</Years>
+            </div>
           </div>
         </MyInfo>
       </Header>
@@ -109,9 +112,9 @@ const UserName = styled.p`
 `;
 
 const Years = styled.div`
-  width: 62px;
   height: 24px;
   background: #ffffff;
+  padding: 0 10px;
   border-radius: 58px;
   color: #ff6800;
   font-weight: 700;
