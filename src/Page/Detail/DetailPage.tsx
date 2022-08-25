@@ -31,7 +31,7 @@ export const DetailPage = () => {
     optionToggle();
   };
   const navigate = useNavigate();
-  const goUpdate = () => navigate(`/update?${id}`);
+  const goUpdate = () => navigate(`/update/${id}`);
   const [goMain] = useMovePage(['/']);
   const deletePost = () => {
     postAPI('delete', { pageIdx: id });
@@ -83,7 +83,7 @@ export const DetailPage = () => {
           </Comments>
         </div>
         <CommentWrapper>
-          {data.comments.map(item => (
+          {data.comments?.map(item => (
             <ChatProfile {...item} key={item.id} />
           ))}
         </CommentWrapper>

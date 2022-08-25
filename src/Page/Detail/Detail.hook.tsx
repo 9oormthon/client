@@ -28,28 +28,31 @@ export type dataType = {
   category: string;
   location: LocationType;
 };
-export const useDetailData = (id: string) => {
+export const useDetailData = (id: string | undefined) => {
   const [data, setData] = useState<dataType | undefined>(undefined);
   const [loading, setLoading] = useState(true);
 
   const getData = async () => {
-    const temp: dataType | undefined = await fetchAPI('list', { id });
+    const temp: dataType | undefined = await fetchAPI(`list/${id}`);
     if (!temp) return;
     setData(temp);
     setLoading(false);
   };
 
   useEffect(() => {
+    console.log(id);
+    if (!id) return;
     getData();
   }, [id]);
 
   return { data, loading };
 };
 
-export const useInputHandler = (id: string) => {
+export const useInputHandler = (id: string | undefined) => {
   const ref = useRef<HTMLInputElement>(null);
   const { id: userId } = getStorage();
   const handleSendComment = () => {
+    if (!id) return;
     if (!ref?.current) return;
     const { value } = ref.current;
     ref.current.value = '';

@@ -55,7 +55,7 @@ export const App = () => {
         }
       />
       <Route
-        path="/update"
+        path="/update/:id"
         element={
           <PrivateRoute>
             <UpdatePage />
