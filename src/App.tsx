@@ -1,4 +1,5 @@
 import { PrivateRoute } from '@HOC/PrivateRoute';
+import { useToggle } from '@Hooks/useToggle';
 import {
   CategoryPage,
   DetailPage,
@@ -8,9 +9,18 @@ import {
   UpdatePage,
   WritePage,
 } from '@Page/.';
+import { StartPage } from '@Page/StartPage';
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 export const App = () => {
+  const { state: loading, toggle: toggleLoading } = useToggle();
+  useEffect(() => {
+    setTimeout(() => {
+      toggleLoading();
+    }, 2000);
+  }, []);
+  if (!loading) return <StartPage />;
   return (
     <Routes>
       <Route
