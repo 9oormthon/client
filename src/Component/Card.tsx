@@ -80,6 +80,11 @@ const BubbleIcon = styled(Bubble)`
   margin-right: 3px;
 `;
 
+const sliceContents = (contents: string) => {
+  if (contents.length <= 65) return contents;
+  return `${contents.slice(0, 65)}...`;
+};
+
 // TODO: years에 따라 다른 Profile image 보여주기
 export const Card = ({ data }: any) => {
   const { title, userName, contents, createdAt, years, commentsCount } = data;
@@ -90,7 +95,7 @@ export const Card = ({ data }: any) => {
         <Profile src="/asset/chick.svg" alt="profile" />
         {title}
       </TitleWrapper>
-      <ContentsWrapper>{contents}</ContentsWrapper>
+      <ContentsWrapper>{sliceContents(contents)}</ContentsWrapper>
       <InfoWrapper>
         <Info>
           <p>{userName}</p>
