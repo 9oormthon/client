@@ -12,7 +12,7 @@ const sliceContents = (contents: string) => {
 };
 
 export const Card = ({ data, isMy }: any) => {
-  const { title, userName, contents, createdAt, years, commentsCount, id } = data;
+  const { title, userName, contents, createdAt, years, postId: id } = data;
 
   return (
     <CardWrapper id="Card" data-id={id}>
@@ -24,10 +24,10 @@ export const Card = ({ data, isMy }: any) => {
       <InfoWrapper>
         <Info>
           <p style={{ marginRight: '10px' }}>{userName}</p>
-          <Comments>
+          {/* <Comments>
             <BubbleIcon />
             {commentsCount}
-          </Comments>
+          </Comments> */}
         </Info>
         <Info>{isMy ? createdAt : moment(createdAt).fromNow()}</Info>
       </InfoWrapper>

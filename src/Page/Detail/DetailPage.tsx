@@ -83,7 +83,7 @@ export const DetailPage = () => {
           </Comments>
         </div>
         <CommentWrapper>
-          {data.comments?.map(item => (
+          {data.comment?.map(item => (
             <ChatProfile {...item} key={item.id} />
           ))}
         </CommentWrapper>

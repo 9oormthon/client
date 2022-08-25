@@ -15,6 +15,7 @@ type commentType = {
   userId: string;
   contents: string;
   createdAt: string;
+  postId: number;
 };
 export type dataType = {
   id: number;
@@ -22,7 +23,7 @@ export type dataType = {
   title: string;
   contents: string;
   createdAt: string;
-  comments: commentType[];
+  comment: commentType[];
   commentsCount: number;
   years: number;
   category: string;
@@ -33,7 +34,7 @@ export const useDetailData = (id: string | undefined) => {
   const [loading, setLoading] = useState(true);
 
   const getData = async () => {
-    const temp: dataType | undefined = await fetchAPI(`posts/${id}`);
+    const temp: dataType | undefined = await fetchAPI(`list/${id}`);
     if (!temp) return;
     setData(temp);
     setLoading(false);
@@ -56,7 +57,7 @@ export const useInputHandler = (id: string | undefined) => {
     if (!ref?.current) return;
     const { value } = ref.current;
     ref.current.value = '';
-    postAPI('comment', { comment: value, postIdx: id, userId });
+    postAPI('comment', { contents: value, postId: id, userName: userId });
   };
   return { ref, handleSendComment };
 };
