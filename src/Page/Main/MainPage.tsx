@@ -1,3 +1,4 @@
+import { ReactComponent as Chick } from '@Assets/chick.svg';
 import { Button } from '@Component/Button';
 import { Card } from '@Component/Card';
 import { useMovePage } from '@Hooks/useMovePage';
@@ -18,7 +19,7 @@ export const MainPage = () => {
       <Header>
         <MenuIcon src="/asset/menu.svg" alt="menu" onClick={goCategory} />
         {category}
-        <ChickIcon src="/asset/chick.svg" alt="chick" onClick={goMyPage} />
+        <Chick onClick={goMyPage} />
       </Header>
       <LocationWrapper>
         <select onChange={handleLocation}>
@@ -52,11 +53,6 @@ const Header = styled.div`
 `;
 
 const MenuIcon = styled.img`
-  width: 22px;
-  height: 22px;
-`;
-
-const ChickIcon = styled.img`
   width: 22px;
   height: 22px;
 `;

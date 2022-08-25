@@ -53,18 +53,6 @@ const Comments = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-
-  /* ::before {
-    content: ' ';
-    height: 100%;
-    background: #aaaaaa;
-    width: 1px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-  } */
 `;
 
 const BubbleIcon = styled(Bubble)`
@@ -89,7 +77,7 @@ export const Card = ({ data, isMy }: any) => {
       <ContentsWrapper>{sliceContents(contents)}</ContentsWrapper>
       <InfoWrapper>
         <Info>
-          <p>{userName}</p>
+          <p style={{ marginRight: '10px' }}>{userName}</p>
           <Comments>
             <BubbleIcon />
             {commentsCount}

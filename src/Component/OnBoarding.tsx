@@ -27,5 +27,5 @@ const IdComponent = () => {
   );
 };
 export const Word = styled.span`
-  color: #ff8836;
+  color: #ff6800;
 `;

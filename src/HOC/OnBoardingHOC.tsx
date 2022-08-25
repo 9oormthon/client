@@ -76,12 +76,13 @@ const Input = styled.input`
   font-weight: 500;
   font-size: 17px;
   line-height: 20px;
+  padding: 10px 0;
 
   color: #242424;
   ::placeholder {
     color: #bbbbbb;
     font-size: 17px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 20px;
   }
 `;
