@@ -38,7 +38,7 @@ export const mockPostData = [
     years: 0,
   },
   {
-    id: 3,
+    id: 5,
     userName: '제주도 정착 꿈나무',
     title: '제주시분들 이주민 반기나요?',
     contents:
@@ -48,7 +48,7 @@ export const mockPostData = [
     years: 0,
   },
   {
-    id: 4,
+    id: 6,
     userName: '제주사랑',
     title: '서귀포에서 창업하려고하는데',
     contents: '잠재 고객을 찾습니다.',

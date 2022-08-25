@@ -1,9 +1,19 @@
 import { useState, useLayoutEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+export type DataType = {
+  title: string;
+  userName: string;
+  contents: string;
+  createdAt: string;
+  years: number;
+  id: number;
+  commentsCount: number;
+};
 type LocationType = '전체' | '제주시' | '서귀포시';
 export const useGetData = (location: LocationType, category: string) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<DataType[]>([]);
 
   useLayoutEffect(() => {
     const fetchData = async () => {
@@ -25,4 +35,18 @@ export const useGetLocation = () => {
   }, []);
 
   return { location, handleLocation };
+};
+
+export const useHandleCardClick = () => {
+  const navigate = useNavigate();
+  const goDetail = (id: string) => navigate(`/detail?${id}`);
+
+  const func = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const target = (e.target as Element).closest('#Card');
+    if (!(target instanceof HTMLDivElement)) return;
+    if (!target.dataset.id) return;
+    goDetail(target.dataset.id);
+  };
+
+  return func;
 };
