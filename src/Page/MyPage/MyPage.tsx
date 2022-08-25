@@ -1,13 +1,65 @@
 /* eslint-disable import/extensions */
 import { ReactComponent as Chick } from '@Assets/chick.svg';
 import { ReactComponent as GoBack } from '@Assets/GoBack.svg';
-import { fetchAPI } from '@Common/Util/api';
+import { getStorage } from '@Common/Util/localStorage';
 import { Card } from '@Component/Card';
-import { CommentCard, CommentCardType } from '@Component/CommentCard';
-import { DataType } from '@Page/Main/MainPage.hook';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { CommentCard } from '@Component/CommentCard';
+import { useMovePage } from '@Hooks/useMovePage';
+import { useHandleCardClick, useHandleMoveCard } from '@Page/Main/MainPage.hook';
 import styled from 'styled-components';
+
+import { useCurrentTab, useGetMyData, useLoading } from './MyPage.hook';
+
+export const MyPage = () => {
+  const [handleGoBack] = useMovePage('/');
+  const { currentTab, handleTabClick } = useCurrentTab();
+  const { isLoading, handleFalseLoading } = useLoading();
+  const { id, years } = getStorage();
+  const { postData, commentData } = useGetMyData(id, handleFalseLoading);
+  const handleCardClick = useHandleCardClick();
+  const handleCommentClick = useHandleMoveCard();
+  const handleBodyClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    handleCardClick(e);
+    handleCommentClick(e);
+  };
+  if (!id) {
+    handleGoBack();
+    return null;
+  }
+  return (
+    <>
+      <Header>
+        <NavBar>
+          <GoBackIcon onClick={handleGoBack} />
+          마이페이지
+        </NavBar>
+        <MyInfo>
+          <ProfileIcon />
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
+            <UserName>{id}</UserName>
+            <Years>{years}년 차</Years>
+          </div>
+        </MyInfo>
+      </Header>
+      <Tabs>
+        <TabItem isCurrentTab={currentTab === 'post'} onClick={() => handleTabClick('post')}>
+          내가 작성한 글
+        </TabItem>
+        <TabItem isCurrentTab={currentTab === 'comment'} onClick={() => handleTabClick('comment')}>
+          내가 작성한 댓글
+        </TabItem>
+      </Tabs>
+      <Body onClick={handleBodyClick}>
+        {!isLoading &&
+          currentTab === 'post' &&
+          postData.map(v => <Card key={v.id} data={v} isMy />)}
+        {!isLoading &&
+          currentTab === 'comment' &&
+          commentData.map(v => <CommentCard key={v.postId} data={v} />)}
+      </Body>
+    </>
+  );
+};
 
 const Header = styled.div`
   background: linear-gradient(180deg, #ff8836 0%, #ff6800 100%);
@@ -105,55 +157,3 @@ const Body = styled.div`
   height: 100vh;
   padding: 20px;
 `;
-
-export const MyPage = () => {
-  const navigate = useNavigate();
-  const handleGoBack = () => navigate(-1);
-  const [currentTab, setCurrentTab] = useState('post');
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleTabClick = (tabName: string) => setCurrentTab(tabName);
-  const [postData, setPostData] = useState<DataType[]>([]);
-  const [commentData, setCommentData] = useState<CommentCardType[]>([]);
-  useEffect(() => {
-    const fetchMyData = async () => {
-      const myPosts = (await fetchAPI('myPosts')) as DataType[];
-      const myComments = (await fetchAPI('myComments')) as CommentCardType[];
-      setPostData(myPosts);
-      setCommentData(myComments);
-      setIsLoading(false);
-    };
-
-    fetchMyData();
-  }, []);
-
-  return (
-    <>
-      <Header>
-        <NavBar>
-          <GoBackIcon onClick={handleGoBack} />
-          마이페이지
-        </NavBar>
-        <MyInfo>
-          <ProfileIcon />
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
-            <UserName>제주토박이</UserName>
-            <Years>24년 차</Years>
-          </div>
-        </MyInfo>
-      </Header>
-      <Tabs>
-        <TabItem isCurrentTab={currentTab === 'post'} onClick={() => handleTabClick('post')}>
-          내가 작성한 글
-        </TabItem>
-        <TabItem isCurrentTab={currentTab === 'comment'} onClick={() => handleTabClick('comment')}>
-          내가 작성한 댓글
-        </TabItem>
-      </Tabs>
-      <Body>
-        {!isLoading && currentTab === 'post' && postData.map(v => <Card data={v} isMy />)}
-        {!isLoading && currentTab === 'comment' && commentData.map(v => <CommentCard data={v} />)}
-      </Body>
-    </>
-  );
-};

@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import { fetchAPI } from '@Common/Util/api';
+import { fetchAPI, postAPI } from '@Common/Util/api';
 import { getStorage } from '@Common/Util/localStorage';
 import { LocationType } from '@Page/Main/MainPage.hook';
 import { useState, useEffect, useRef } from 'react';
@@ -46,20 +46,19 @@ export const useDetailData = (id: string) => {
   return { data, loading };
 };
 
-export const useInputHandler = () => {
+export const useInputHandler = (id: string) => {
   const ref = useRef<HTMLInputElement>(null);
+  const { id: userId } = getStorage();
   const handleSendComment = () => {
     if (!ref?.current) return;
     const { value } = ref.current;
-    // postComment
-    console.log(value);
     ref.current.value = '';
+    postAPI('comment', { comment: value, postIdx: id, userId });
   };
   return { ref, handleSendComment };
 };
 
 export const useCheckMyPost = (writer: string) => {
   const { id } = getStorage();
-  return true;
   return id === writer;
 };

@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { ReactComponent as Bubble } from '@Assets/bubble.svg';
 import { Option, Send } from '@Assets/categoryIcons';
+import { postAPI } from '@Common/Util/api';
 import { Button } from '@Component/Button';
 import { ChatProfile } from '@Component/ChatProfile';
 import { Word } from '@Component/OnBoarding';
@@ -21,7 +22,7 @@ export const DetailPage = () => {
   const id = useQueryStr();
   const { data, loading } = useDetailData(id);
   const category = useRecoilValue(CategorySelector);
-  const { ref, handleSendComment } = useInputHandler();
+  const { ref, handleSendComment } = useInputHandler(id);
   const myPost = useCheckMyPost(data?.userName ?? '');
   const { state: optionModal, toggle: optionToggle } = useToggle();
   const { state: deleteModal, toggle: deleteToggle } = useToggle();
@@ -33,10 +34,9 @@ export const DetailPage = () => {
   const goUpdate = () => navigate(`/update?${id}`);
   const [goMain] = useMovePage(['/']);
   const deletePost = () => {
+    postAPI('delete', { pageIdx: id });
     deleteToggle();
     goMain();
-    // api call id
-    console.log(id);
   };
   if (!data) return null;
   if (loading) return <div>...loading!</div>;

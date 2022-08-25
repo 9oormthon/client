@@ -50,3 +50,20 @@ export const useHandleCardClick = () => {
 
   return func;
 };
+
+export const useHandleMoveCard = () => {
+  const navigate = useNavigate();
+  const goDetail = (id: string) => navigate(`/detail?${id}`);
+
+  const func = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    console.log(e.target);
+    const target = (e.target as Element).closest('#Comment');
+    console.log(target);
+    if (!(target instanceof HTMLDivElement)) return;
+    console.log(target.dataset.id);
+    if (!target.dataset.id) return;
+    goDetail(target.dataset.id);
+  };
+
+  return func;
+};

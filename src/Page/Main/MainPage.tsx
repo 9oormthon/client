@@ -14,6 +14,7 @@ export const MainPage = () => {
   const { data, isLoading } = useGetData(location, category);
   const [goCategory, goWrite, goMyPage] = useMovePage(['/category', '/write', '/my']);
   const handleCardClick = useHandleCardClick();
+
   return (
     <div>
       <Header>
