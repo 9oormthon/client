@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 import { ReactComponent as Chick } from '@Assets/chick.svg';
 import { ReactComponent as GoBack } from '@Assets/GoBack.svg';
-import { getLevel } from '@Common/Util/level';
+import { getLevel, getLevelIcon } from '@Common/Util/level';
 import { getStorage } from '@Common/Util/localStorage';
 import { Card } from '@Component/Card';
 import { CommentCard } from '@Component/CommentCard';
@@ -35,7 +35,8 @@ export const MyPage = () => {
           마이페이지
         </NavBar>
         <MyInfo>
-          <ProfileIcon />
+          <ProfileIcon>{getLevelIcon(Number(years))}</ProfileIcon>
+          {/* <ProfileIcon /> */}
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
             <UserName>{id}</UserName>
             <div style={{ display: 'flex' }}>
@@ -80,7 +81,7 @@ const NavBar = styled.div`
   padding: 20px;
 `;
 
-const ProfileIcon = styled(Chick)`
+const ProfileIcon = styled.div`
   padding: 17px;
   width: 64px;
   height: 64px;
@@ -88,7 +89,8 @@ const ProfileIcon = styled(Chick)`
   border-radius: 50%;
   border: 2px solid #ff9348;
   margin-right: 10px;
-
+  display: flex;
+  justify-content: center;
   path {
     fill: #ff6800;
   }
@@ -160,4 +162,16 @@ const Body = styled.div`
   width: 100%;
   height: 100vh;
   padding: 20px;
+`;
+
+const LevelIcon = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  svg {
+    width: 40px;
+    height: 40px;
+  }
 `;
