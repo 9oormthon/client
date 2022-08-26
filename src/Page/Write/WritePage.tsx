@@ -52,7 +52,6 @@ export const WritePage = () => {
             {CATEGORY_NAMES.map((item, i) => (
               <option key={i}>{item}</option>
             ))}
-            <option />
           </Selector>
         </SelectorBox>
         <ContentsInput placeholder="내용을 입력하세요" ref={contentsRef} />

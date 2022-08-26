@@ -24,8 +24,8 @@ export const useGetMyData = (id: string | null, cb: () => void) => {
   useEffect(() => {
     if (!id) return;
     const fetchMyData = async () => {
-      const myPosts = (await fetchAPI('myPosts', { id })) as DataType[];
-      const myComments = (await fetchAPI('myComments', { id })) as CommentCardType[];
+      const myPosts = (await fetchAPI('myPage/posts', { userName: id })) as DataType[];
+      const myComments = (await fetchAPI('myPage/comments', { userName: id })) as CommentCardType[];
       setPostData(myPosts);
       setCommentData(myComments);
       cb();

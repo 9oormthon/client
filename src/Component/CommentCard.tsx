@@ -41,7 +41,6 @@ export type CommentCardType = {
 };
 export const CommentCard = ({ data }: { data: CommentCardType }) => {
   const { postId, postTitle, contents, createdAt } = data;
-
   return (
     <CardWrapper id="Comment" data-id={postId}>
       <Info>{createdAt}</Info>

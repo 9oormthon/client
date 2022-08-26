@@ -30,7 +30,8 @@ export const MainPage = () => {
         </select>
       </LocationWrapper>
       <Body onClick={handleCardClick}>
-        {!isLoading && data.map(v => <Card key={v.id} data={v} />)}
+        {!isLoading && data.map(v => <Card key={v.postId} data={v} />)}
+        {!isLoading && data.length === 0 && <Empty>~텅</Empty>}
       </Body>
       <Footer>
         <WriteButton onClick={goWrite}>작성하기</WriteButton>
@@ -83,10 +84,21 @@ const LocationWrapper = styled.div`
 
 const Body = styled.div`
   margin-top: 90px;
+  height: calc(100vh - 90px);
   background-color: #f5f5f5;
   width: 100%;
   padding: 20px;
   padding-top: 0px;
+`;
+
+const Empty = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-weight: 500;
 `;
 
 const WriteButton = styled(Button)`

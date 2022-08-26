@@ -55,7 +55,7 @@ export const MyPage = () => {
       <Body onClick={handleBodyClick}>
         {!isLoading &&
           currentTab === 'post' &&
-          postData?.map(v => <Card key={v.id} data={v} isMy />)}
+          postData?.map(v => <Card key={v.postId} data={v} isMy />)}
         {!isLoading &&
           currentTab === 'comment' &&
           commentData?.map(v => <CommentCard key={v.postId} data={v} />)}

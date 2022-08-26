@@ -1,4 +1,5 @@
-import { filter } from '@Common/Util/api';
+/* eslint-disable no-shadow */
+import { fetchAPI, filter } from '@Common/Util/api';
 import { useState, useLayoutEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,7 +9,7 @@ export type DataType = {
   contents: string;
   createdAt: string;
   years: number;
-  id: number;
+  postId: number;
   commentsCount: number;
 };
 export type LocationType = '전체' | '제주시' | '서귀포시';
@@ -18,12 +19,8 @@ export const useGetData = (location: LocationType, category: string) => {
 
   useLayoutEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(
-        `http://3.39.231.16:8080/api/posts?location=${location}?category=${category}`,
-      );
-      const json = await response.json();
-
-      const filterLocation = location === '전체' ? json : filter(json, 'location', location);
+      const data = (await fetchAPI('posts')) as DataType[];
+      const filterLocation = location === '전체' ? data : filter(data, 'location', location);
       const arr =
         category === '전체' ? filterLocation : filter(filterLocation, 'category', category);
       setData(arr);

@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import { Profile } from './Profile';
 
 type Props = {
-  id: number;
+  commentId: number;
   userName: string;
   createdAt: string;
   contents: string;
 };
-export const ChatProfile = ({ id, userName, createdAt, contents }: Props) => {
+export const ChatProfile = ({ commentId, userName, createdAt, contents }: Props) => {
   return (
     <Container>
       <ProfileContainer>
