@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
 import { ReactComponent as Chick } from '@Assets/chick.svg';
 import { ReactComponent as GoBack } from '@Assets/GoBack.svg';
+import { getLevel } from '@Common/Util/level';
 import { getStorage } from '@Common/Util/localStorage';
 import { Card } from '@Component/Card';
 import { CommentCard } from '@Component/CommentCard';
@@ -38,7 +39,7 @@ export const MyPage = () => {
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
             <UserName>{id}</UserName>
             <div style={{ display: 'flex' }}>
-              <Years style={{ marginRight: '5px' }}>LEVEL 4</Years>
+              <Years style={{ marginRight: '5px' }}>LEVEL {getLevel(Number(years))}</Years>
               <Years>{years}년 차</Years>
             </div>
           </div>
