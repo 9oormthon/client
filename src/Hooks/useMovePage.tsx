@@ -8,6 +8,6 @@ export const useMovePage: Props = str => {
   if (typeof str === 'string') {
     str = [str];
   }
-  const func = str.map(string => () => navigate(string));
+  const func = str?.map(string => () => navigate(string));
   return func;
 };

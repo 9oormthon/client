@@ -4,6 +4,7 @@ import moment from 'moment';
 import styled from 'styled-components';
 
 import { ProfileWrapper } from './Profile';
+
 import 'moment/locale/ko';
 
 const sliceContents = (contents: string) => {

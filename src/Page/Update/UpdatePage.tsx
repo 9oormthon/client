@@ -13,9 +13,10 @@ import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+const idx = {};
 export const UpdatePage = () => {
   const id = useQueryStr();
-  const { data, loading } = useDetailData(id, {}, () => {});
+  const { data, loading } = useDetailData(id, idx, () => {});
   const navigate = useNavigate();
   const goDetail = () => navigate(`/detail/${id}`);
   const titleRef = useRef<HTMLInputElement>(null);
@@ -41,6 +42,7 @@ export const UpdatePage = () => {
   };
 
   useEffect(() => {
+    console.log('???');
     if (!titleRef?.current || !contentsRef?.current) return;
     const { title, contents } = data as dataType;
     titleRef.current.value = title;
@@ -66,7 +68,7 @@ export const UpdatePage = () => {
             <option>서귀포시</option>
           </Selector>
           <Selector onChange={handleCategory}>
-            {CATEGORY_NAMES.map((item, i) => (
+            {CATEGORY_NAMES?.map((item, i) => (
               <option key={i}>{item}</option>
             ))}
           </Selector>

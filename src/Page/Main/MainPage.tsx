@@ -30,8 +30,8 @@ export const MainPage = () => {
         </select>
       </LocationWrapper>
       <Body onClick={handleCardClick}>
-        {!isLoading && data.map(v => <Card key={v.postId} data={v} />)}
-        {!isLoading && data.length === 0 && <Empty>~텅</Empty>}
+        {!isLoading && data?.map(v => <Card key={v.postId} data={v} />)}
+        {!isLoading && data?.length === 0 && <Empty>~텅</Empty>}
       </Body>
       <Footer>
         <WriteButton onClick={goWrite}>작성하기</WriteButton>

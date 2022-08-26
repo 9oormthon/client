@@ -49,7 +49,7 @@ export const WritePage = () => {
             <option>서귀포시</option>
           </Selector>
           <Selector onChange={handleCategory}>
-            {CATEGORY_NAMES.map((item, i) => (
+            {CATEGORY_NAMES?.map((item, i) => (
               <option key={i}>{item}</option>
             ))}
           </Selector>

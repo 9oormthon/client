@@ -3,7 +3,7 @@
 import { fetchAPI, postAPI } from '@Common/Util/api';
 import { getStorage } from '@Common/Util/localStorage';
 import { LocationType } from '@Page/Main/MainPage.hook';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 
 export const useQueryStr = () => {
@@ -30,17 +30,21 @@ export type dataType = {
   category: string;
   location: LocationType;
 };
-export const useDetailData = (id: string | undefined, idx: object, scrollDown: () => void) => {
+export const useDetailData = (
+  id: string | undefined,
+  idx: object | null,
+  scrollDown: () => void,
+) => {
   const [data, setData] = useState<dataType | undefined>(undefined);
   const [loading, setLoading] = useState(true);
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     const temp: dataType | undefined = await fetchAPI(`list/${id}`);
     temp?.comment.reverse();
     if (!temp) return;
     setData(temp);
     setLoading(false);
-  };
+  }, [id]);
 
   useEffect(() => {
     if (!id) return;

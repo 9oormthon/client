@@ -27,7 +27,7 @@ export const CategoryPage = () => {
       <BackButton onClick={handleGoBack} />
 
       <Container>
-        {CATEGORY.map(({ id, icon, title }) => (
+        {CATEGORY?.map(({ id, icon, title }) => (
           <CategoryWrapper
             id="container"
             data-id={id}
