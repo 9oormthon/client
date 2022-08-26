@@ -1,21 +1,19 @@
 # 🍊 제식인 ( = 제주 지식인 )
 
+<div align="center">
 <img width="621" alt="image" src="https://user-images.githubusercontent.com/85419343/186821691-a9216e35-d427-4387-9b95-0295972c94fd.png">
-
-<div style="text-align:center; font-size:18px; font-weight:bold">
     <p>제주살이를 원하는 사람들의 신중한 결정을 도와주는</p> 
     <p>질의응답 커뮤니티 서비스</p>
     <br />
     <a href="www.구름톤.kro.kr">🍊 배포 사이트</a>
 </div>
 
----
-
+<br />
 <br />
 
 ## 📅 프로젝트 기간
 
-2022.08.24 ~ 08.26
+2022.08.24 ~ 08.26 (2박 3일)
 
 <br />
 
