@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable no-shadow */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-no-undef */
@@ -14,7 +15,7 @@ import styled from 'styled-components';
 
 export const UpdatePage = () => {
   const id = useQueryStr();
-  const { data, loading } = useDetailData(id, {});
+  const { data, loading } = useDetailData(id, {}, () => {});
   const navigate = useNavigate();
   const goDetail = () => navigate(`/detail/${id}`);
   const titleRef = useRef<HTMLInputElement>(null);

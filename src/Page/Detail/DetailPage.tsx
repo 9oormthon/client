@@ -12,32 +12,43 @@ import { useMovePage } from '@Hooks/useMovePage';
 import { useToggle } from '@Hooks/useToggle';
 import { CategorySelector } from '@Recoil/Category';
 import moment from 'moment';
-import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import 'moment/locale/ko';
-import { useDetailData, useInputHandler, useQueryStr } from './Detail.hook';
+import {
+  useAfterSendComment,
+  useDetailData,
+  useInputHandler,
+  useQueryStr,
+  useScrollDown,
+} from './Detail.hook';
 
 export const DetailPage = () => {
   const id = useQueryStr();
   const category = useRecoilValue(CategorySelector);
-  const [idx, setIdx] = useState({});
-  const { ref, handleSendComment } = useInputHandler(id, setIdx);
-  const { data, loading } = useDetailData(id, idx);
+
+  const { divRef, handleViewRef } = useScrollDown();
+  const { idx, handleReRender } = useAfterSendComment();
+
+  const { ref, handleSendComment, handleEnterPress } = useInputHandler(id, handleReRender);
+  const { data, loading } = useDetailData(id, idx, handleViewRef);
   const { id: userName } = getStorage();
   const myPost = data?.userName === userName;
+
   const { state: optionModal, toggle: optionToggle } = useToggle();
   const { state: deleteModal, toggle: deleteToggle } = useToggle();
   const handleDeleteButton = () => {
     deleteToggle();
     optionToggle();
   };
+
   const [goMain, goUpdate] = useMovePage(['/', `/update/${id}`]);
   const deletePost = () => {
     postAPI('delete', { postId: id, userName }).then(res => goMain());
     deleteToggle();
   };
+
   if (!data) return null;
   if (loading) return <div>...loading!</div>;
   return (
@@ -86,10 +97,11 @@ export const DetailPage = () => {
           {data.comment?.map(item => (
             <ChatProfile {...item} key={item.commentId} />
           ))}
+          <div ref={divRef} />
         </CommentWrapper>
       </div>
       <Footer>
-        <Input placeholder="댓글을 남겨보세요" ref={ref} />
+        <Input placeholder="댓글을 남겨보세요" ref={ref} onKeyDown={handleEnterPress} />
         <SendIcon onClick={handleSendComment} />
       </Footer>
       {deleteModal && (
@@ -134,7 +146,7 @@ const Wrapper = styled.div`
 
 const CommentWrapper = styled(Wrapper)`
   padding-top: 0px;
-  height: calc(100vh - 360px);
+  height: calc(100vh - 315px);
   overflow: auto;
 `;
 

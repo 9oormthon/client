@@ -161,4 +161,3 @@ const CATEGORY = [
 ];
 
 export const [a, ...CATEGORY_NAMES] = CATEGORY.map(item => item.title);
-console.log(CATEGORY_NAMES);

@@ -30,7 +30,7 @@ export type dataType = {
   category: string;
   location: LocationType;
 };
-export const useDetailData = (id: string | undefined, idx: object) => {
+export const useDetailData = (id: string | undefined, idx: object, scrollDown: () => void) => {
   const [data, setData] = useState<dataType | undefined>(undefined);
   const [loading, setLoading] = useState(true);
 
@@ -47,21 +47,45 @@ export const useDetailData = (id: string | undefined, idx: object) => {
     getData();
   }, [id, idx]);
 
+  useEffect(() => {
+    scrollDown();
+  }, [data]);
   return { data, loading };
 };
 
-export const useInputHandler = (
-  id: string | undefined,
-  setter: React.Dispatch<React.SetStateAction<{}>>,
-) => {
+export const useInputHandler = (id: string | undefined, sendCallback: () => void) => {
   const ref = useRef<HTMLInputElement>(null);
   const { id: userId } = getStorage();
+
   const handleSendComment = () => {
     if (!id) return;
     if (!ref?.current) return;
     const { value } = ref.current;
     ref.current.value = '';
-    postAPI('comment', { contents: value, postId: id, userName: userId }).then(res => setter({}));
+    postAPI('comment', { contents: value, postId: id, userName: userId }).then(res =>
+      sendCallback(),
+    );
   };
-  return { ref, handleSendComment };
+
+  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.keyCode !== 13) return;
+    handleSendComment();
+  };
+
+  return { ref, handleSendComment, handleEnterPress };
+};
+
+export const useAfterSendComment = () => {
+  const [idx, setIdx] = useState({});
+  const handleReRender = () => setIdx({});
+
+  return { idx, handleReRender };
+};
+export const useScrollDown = () => {
+  const divRef = useRef<HTMLDivElement>(null);
+  const handleViewRef = () => {
+    if (!divRef.current) return;
+    divRef.current.scrollIntoView();
+  };
+  return { divRef, handleViewRef };
 };
