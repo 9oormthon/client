@@ -2,10 +2,7 @@
 
 <div align="center">
 <img width="621" alt="image" src="https://user-images.githubusercontent.com/85419343/186821691-a9216e35-d427-4387-9b95-0295972c94fd.png">
-    <p>제주살이를 원하는 사람들의 신중한 결정을 도와주는</p> 
-    <p>질의응답 커뮤니티 서비스</p>
-    <br />
-    <a href="http://www.구름톤.kro.kr">🍊 배포 사이트</a>
+    <p>제주살이를 원하는 사람들의 신중한 결정을 도와주는 질의응답 커뮤니티 서비스</p>
 </div>
 
 <br />
@@ -19,7 +16,7 @@
 
 ## 💻 팀원 소개
 
-|   [김영진](https://github.com/jin-Pro)(FE)    |   [이자윤](https://github.com/jaypedia)(FE)   |  [신지환](https://github.com/sgh002400)(BE)   |              [한수민]()(Design)               |
+|   [김영진](https://github.com/jin-Pro)(Frontend)    |   [이자윤](https://github.com/jaypedia)(Frontend)   |  [신지환](https://github.com/sgh002400)(Backend)   |              한수민(Design)               |
 | :-------------------------------------------: | :-------------------------------------------: | :-------------------------------------------: | :-------------------------------------------: |
 | <img src="https://i.imgur.com/f4YACN5.png" /> | <img src="https://i.imgur.com/PvuUb04.png" /> | <img src="https://i.imgur.com/OFabSLe.png" /> | <img src="https://i.imgur.com/AvSC2Jl.png" /> |
 
